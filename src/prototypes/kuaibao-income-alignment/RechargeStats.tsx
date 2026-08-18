@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChartLine, X } from 'lucide-react';
 import calendarIcon from './calendar.svg';
+import { clampDateToToday, getStatsDefaultRange, getTodayText, isFutureDate } from './dateRules';
 
 export type RechargeStatsPageId =
   | 'mobile-recharge-game-stats'
@@ -29,6 +30,11 @@ type StatRow = {
   couponFace: number;
   orderCount: number;
   orderPeople: number;
+  playerGameKeys: string[];
+  purchasedOrderCount: number;
+  giftedOrderCount: number;
+  purchasedPlayerGameKeys: string[];
+  giftedPlayerGameKeys: string[];
   successOrders: number;
   failedOrders: number;
   abnormalOrders: number;
@@ -58,13 +64,13 @@ function StatsViewSelect({ value, onChange }: { value: RechargeStatsPageId; onCh
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, []);
-  return <div className="kbi-stats-view-select" ref={rootRef}>
+  return <div className="kbi-stats-view-select" data-annotation-id="recharge-stats-view" ref={rootRef}>
     <button type="button" aria-label="三级功能" aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((valueOpen) => !valueOpen)}><span>{selected.label}</span><i></i></button>
     {open && <div className="kbi-stats-view-options" role="listbox">{availableOptions.map((option) => <button type="button" role="option" aria-selected={option.id === value} className={option.id === value ? 'is-selected' : ''} key={option.id} onClick={() => { onChange(option.id); setOpen(false); }}>{option.label}</button>)}</div>}
   </div>;
 }
 
-function StatsCompactSelect({ label, value, options, className = '', onChange }: { label: string; value: string; options: Array<{ value:string; label:string }>; className?: string; onChange: (value:string) => void }) {
+function StatsCompactSelect({ label, value, options, className = '', annotationId, onChange }: { label: string; value: string; options: Array<{ value:string; label:string }>; className?: string; annotationId?: string; onChange: (value:string) => void }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const selected = options.find((option) => option.value === value) ?? options[0];
@@ -75,7 +81,7 @@ function StatsCompactSelect({ label, value, options, className = '', onChange }:
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, []);
-  return <div className={`kbi-compact-select ${className}`} ref={rootRef}>
+  return <div className={`kbi-compact-select ${className}`} data-annotation-id={annotationId} ref={rootRef}>
     <button type="button" aria-label={label} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((valueOpen) => !valueOpen)}><span>{selected.label}</span><i></i></button>
     {open && <div className="kbi-compact-options" role="listbox">{options.map((option) => <button type="button" role="option" aria-selected={option.value === value} className={option.value === value ? 'is-selected' : ''} key={option.value} onClick={() => { onChange(option.value); setOpen(false); }}>{option.label}</button>)}</div>}
   </div>;
@@ -127,11 +133,23 @@ const statRows: StatRow[] = mockEntities.flatMap(([gameId, gameName, developerId
     const successAmount = Math.max(2800, Math.round((base * timeFactor + wave) / 10) * 10);
     const subsidyAmount = Math.round(successAmount * (0.048 + (entityIndex % 5) * 0.006) / 10) * 10;
     const failedAmount = Math.round(successAmount * (0.025 + ((entityIndex + dateIndex) % 4) * 0.007) / 10) * 10;
-    const orderCount = Math.max(80, Math.round(successAmount / (52 + entityIndex % 6 * 4)));
+    const allOrderCount = Math.max(80, Math.round(successAmount / (52 + entityIndex % 6 * 4)));
     const failedOrders = 5 + (entityIndex * 3 + dateIndex * 2) % 28;
     const abnormalOrders = 1 + (entityIndex + dateIndex * 2) % 9;
-    const successOrders = Math.max(1, orderCount - failedOrders - abnormalOrders);
-    const couponCount = Math.round(orderCount * (0.18 + (entityIndex % 4) * 0.025));
+    const successOrders = Math.max(1, allOrderCount - failedOrders - abnormalOrders);
+    const orderCount = successOrders;
+    const orderPeople = Math.max(1, Math.round(successOrders * (0.66 + (entityIndex % 3) * 0.035)));
+    const giftedOrderCount = Math.max(1, Math.round(orderCount * (0.05 + ((entityIndex + dateIndex) % 4) * 0.01)));
+    const purchasedOrderCount = orderCount - giftedOrderCount;
+    const giftedOrderPeople = Math.min(giftedOrderCount, Math.max(1, Math.round(orderPeople * (0.04 + (entityIndex % 3) * 0.01))));
+    const purchasedOrderPeople = orderPeople - giftedOrderPeople;
+    const purchasedPoolSize = Math.max(purchasedOrderPeople, Math.round(purchasedOrderPeople * 2.6));
+    const giftedPoolSize = Math.max(giftedOrderPeople, Math.round(giftedOrderPeople * 2.6));
+    // 购买与获赠使用互不重叠的玩家号段，保证同一“玩家ID + 游戏ID”不会同时进入两类人数。
+    const purchasedPlayerGameKeys = Array.from({ length: purchasedOrderPeople }, (_, playerIndex) => `${gameId}:${150000000 + entityIndex * 100000 + ((dateIndex * 37 + playerIndex) % purchasedPoolSize)}`);
+    const giftedPlayerGameKeys = Array.from({ length: giftedOrderPeople }, (_, playerIndex) => `${gameId}:${190000000 + entityIndex * 100000 + ((dateIndex * 17 + playerIndex) % giftedPoolSize)}`);
+    const playerGameKeys = [...purchasedPlayerGameKeys, ...giftedPlayerGameKeys];
+    const couponCount = Math.round(successOrders * (0.18 + (entityIndex % 4) * 0.025));
     return {
       time, gameId, gameName, developerId, developerName, companyName,
       pendingAmount: successAmount + subsidyAmount,
@@ -141,7 +159,12 @@ const statRows: StatRow[] = mockEntities.flatMap(([gameId, gameName, developerId
       couponCount,
       couponFace: couponCount * 20,
       orderCount,
-      orderPeople: Math.round(orderCount * (0.66 + (entityIndex % 3) * 0.035)),
+      orderPeople,
+      playerGameKeys,
+      purchasedOrderCount,
+      giftedOrderCount,
+      purchasedPlayerGameKeys,
+      giftedPlayerGameKeys,
       successOrders,
       failedOrders,
       abnormalOrders,
@@ -149,7 +172,8 @@ const statRows: StatRow[] = mockEntities.flatMap(([gameId, gameName, developerId
   })
 );
 
-const initialFilters = { startDate:'2026-08-01', endDate:'2026-08-10', game:'', developer:'', company:'' };
+const statsDefaultRange = getStatsDefaultRange();
+const initialFilters = { ...statsDefaultRange, game:'', developer:'', company:'' };
 
 function money(value: number) {
   return value.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -182,7 +206,23 @@ function addDays(date: Date, offset: number) {
   return isoDate(result.getFullYear(), result.getMonth(), result.getDate());
 }
 
-function StatsDateRangePicker({ start, end, precision, onChange }: { start: string; end: string; precision: string; onChange: (start: string, end: string) => void }) {
+function isWithinStatsRangeLimit(anchor: string, candidate: string, precision: string) {
+  if (precision === 'year') {
+    return Math.abs(Number(candidate.slice(0, 4)) - Number(anchor.slice(0, 4))) <= 4;
+  }
+  if (precision === 'month') {
+    const anchorMonth = Number(anchor.slice(0, 4)) * 12 + Number(anchor.slice(5, 7)) - 1;
+    const candidateMonth = Number(candidate.slice(0, 4)) * 12 + Number(candidate.slice(5, 7)) - 1;
+    return Math.abs(candidateMonth - anchorMonth) <= 11;
+  }
+  const earlierText = candidate < anchor ? candidate : anchor;
+  const laterText = candidate < anchor ? anchor : candidate;
+  const earlier = new Date(`${earlierText}T00:00:00`);
+  const firstDateOutsideRange = new Date(earlier.getFullYear() + 1, earlier.getMonth(), earlier.getDate());
+  return new Date(`${laterText}T00:00:00`) < firstDateOutsideRange;
+}
+
+function StatsDateRangePicker({ start, end, precision, annotationId, limitRange = false, onChange }: { start: string; end: string; precision: string; annotationId?: string; limitRange?: boolean; onChange: (start: string, end: string) => void }) {
   const [open, setOpen] = useState(false);
   const [waitingForEnd, setWaitingForEnd] = useState(false);
   const [viewDate, setViewDate] = useState(() => new Date(`${start}T00:00:00`));
@@ -214,32 +254,37 @@ function StatsDateRangePicker({ start, end, precision, onChange }: { start: stri
       setWaitingForEnd(true);
       return;
     }
+    if (limitRange && !isWithinStatsRangeLimit(start, date, 'day')) return;
     onChange(date < start ? date : start, date < start ? start : date);
     closePicker();
   };
 
   const chooseMonth = (year: number, month: number) => {
     const selectedStart = isoDate(year, month, 1);
-    const selectedEnd = monthEnd(year, month);
+    if (selectedStart > getTodayText()) return;
+    const selectedEnd = clampDateToToday(monthEnd(year, month));
     if (!waitingForEnd) {
       onChange(selectedStart, selectedEnd);
       setWaitingForEnd(true);
       return;
     }
-    if (selectedStart < start) onChange(selectedStart, monthEnd(Number(start.slice(0, 4)), Number(start.slice(5, 7)) - 1));
+    if (limitRange && !isWithinStatsRangeLimit(start, selectedStart, 'month')) return;
+    if (selectedStart < start) onChange(selectedStart, clampDateToToday(monthEnd(Number(start.slice(0, 4)), Number(start.slice(5, 7)) - 1)));
     else onChange(start.slice(0, 7) + '-01', selectedEnd);
     closePicker();
   };
 
   const chooseYear = (year: number) => {
     const selectedStart = `${year}-01-01`;
-    const selectedEnd = `${year}-12-31`;
+    if (selectedStart > getTodayText()) return;
+    const selectedEnd = clampDateToToday(`${year}-12-31`);
     if (!waitingForEnd) {
       onChange(selectedStart, selectedEnd);
       setWaitingForEnd(true);
       return;
     }
-    if (selectedStart < start) onChange(selectedStart, `${start.slice(0, 4)}-12-31`);
+    if (limitRange && !isWithinStatsRangeLimit(start, selectedStart, 'year')) return;
+    if (selectedStart < start) onChange(selectedStart, clampDateToToday(`${start.slice(0, 4)}-12-31`));
     else onChange(`${start.slice(0, 4)}-01-01`, selectedEnd);
     closePicker();
   };
@@ -251,7 +296,7 @@ function StatsDateRangePicker({ start, end, precision, onChange }: { start: stri
       const yesterday = addDays(today, -1);
       onChange(yesterday, yesterday);
     } else {
-      onChange(addDays(today, -Number(kind)), todayText);
+      onChange(addDays(today, -(Number(kind) - 1)), todayText);
     }
     closePicker();
   };
@@ -262,7 +307,8 @@ function StatsDateRangePicker({ start, end, precision, onChange }: { start: stri
     <div className="kbi-calendar-grid">{monthCells(year, month).map((cell) => {
       const selected = cell.current && (cell.date === start || cell.date === end);
       const inRange = cell.current && cell.date > start && cell.date < end;
-      return <button key={cell.date} className={`${cell.current ? '' : 'is-other'} ${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseDay(cell.date)}><span>{cell.day}</span></button>;
+      const outsideRangeLimit = limitRange && waitingForEnd && !isWithinStatsRangeLimit(start, cell.date, 'day');
+      return <button key={cell.date} disabled={isFutureDate(cell.date) || outsideRangeLimit} className={`${cell.current ? '' : 'is-other'} ${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseDay(cell.date)}><span>{cell.day}</span></button>;
     })}</div>
   </div>;
 
@@ -274,7 +320,8 @@ function StatsDateRangePicker({ start, end, precision, onChange }: { start: stri
       const endMonth = end.slice(0, 7);
       const selected = monthKey === startMonth || monthKey === endMonth;
       const inRange = monthKey > startMonth && monthKey < endMonth;
-      return <button key={monthKey} className={`${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseMonth(year, month)}>{month + 1}月</button>;
+      const outsideRangeLimit = limitRange && waitingForEnd && !isWithinStatsRangeLimit(start, `${monthKey}-01`, 'month');
+      return <button key={monthKey} disabled={monthKey > getTodayText().slice(0, 7) || outsideRangeLimit} className={`${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseMonth(year, month)}>{month + 1}月</button>;
     })}</div>
   </div>;
 
@@ -286,14 +333,15 @@ function StatsDateRangePicker({ start, end, precision, onChange }: { start: stri
       const endYear = Number(end.slice(0, 4));
       const selected = year === startYear || year === endYear;
       const inRange = year > startYear && year < endYear;
-      return <button key={year} className={`${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseYear(year)}>{year}</button>;
+      const outsideRangeLimit = limitRange && waitingForEnd && !isWithinStatsRangeLimit(start, `${year}-01-01`, 'year');
+      return <button key={year} disabled={year > Number(getTodayText().slice(0, 4)) || outsideRangeLimit} className={`${selected ? 'is-selected' : ''} ${inRange ? 'is-range' : ''}`} onClick={() => chooseYear(year)}>{year}</button>;
     })}</div>
   </div>;
 
   const displayStart = precision === 'year' ? start.slice(0, 4) : precision === 'month' ? start.slice(0, 7) : start;
   const displayEnd = precision === 'year' ? end.slice(0, 4) : precision === 'month' ? end.slice(0, 7) : end;
 
-  return <div className="kbi-date-picker" ref={pickerRef}>
+  return <div className="kbi-date-picker" data-annotation-id={annotationId} ref={pickerRef}>
     <button className={`kbi-date-trigger ${open ? 'is-open' : ''}`} onClick={() => { setOpen((visible) => !visible); setWaitingForEnd(false); setViewDate(new Date(`${start}T00:00:00`)); }}><img src={calendarIcon} alt="" />{displayStart}<i>—</i>{displayEnd}</button>
     {open && <div className={`kbi-stats-date-popover is-${precision}`}>
       {precision === 'day' && <><div className="kbi-quick-ranges"><button onClick={() => quickSelect('yesterday')}>昨天</button><button onClick={() => quickSelect('7')}>过去7天</button><button onClick={() => quickSelect('30')}>过去30天</button><button onClick={() => quickSelect('90')}>过去90天</button></div><div className="kbi-stats-calendar-main"><div className="kbi-calendar-nav"><button aria-label="上一年" onClick={() => setViewDate((current) => new Date(current.getFullYear() - 1, current.getMonth(), 1))}>«</button><button aria-label="上个月" onClick={() => setViewDate((current) => new Date(current.getFullYear(), current.getMonth() - 1, 1))}>‹</button><span></span><button aria-label="下个月" onClick={() => setViewDate((current) => new Date(current.getFullYear(), current.getMonth() + 1, 1))}>›</button><button aria-label="下一年" onClick={() => setViewDate((current) => new Date(current.getFullYear() + 1, current.getMonth(), 1))}>»</button></div><div className="kbi-calendar-panels">{renderMonth(leftYear, leftMonth)}{renderMonth(rightDate.getFullYear(), rightDate.getMonth())}</div></div></>}
@@ -342,6 +390,9 @@ function StatsChart({ rows, mode, metric, times }: { rows: StatRow[]; mode: Stat
   const bottom = 300;
   const xAt = (index: number) => times.length === 1 ? (left + right) / 2 : left + index * ((right - left) / (times.length - 1));
   const yAt = (value: number) => bottom - value / max * (bottom - top);
+  const maxXAxisLabels = (times[0]?.length ?? 0) >= 10 ? 10 : (times[0]?.length ?? 0) >= 7 ? 12 : 14;
+  const timeLabelStep = Math.max(1, Math.ceil(times.length / maxXAxisLabels));
+  const visibleTimeLabelIndexes = new Set(times.map((_, index) => index).filter((index) => index % timeLabelStep === 0));
   const hoveredX = hoveredTimeIndex !== null ? xAt(hoveredTimeIndex) : 0;
   const tooltipColumns = visibleSeries.length > 8 ? 2 : 1;
   const tooltipRows = Math.ceil(visibleSeries.length / tooltipColumns);
@@ -367,7 +418,7 @@ function StatsChart({ rows, mode, metric, times }: { rows: StatRow[]; mode: Stat
         const nextX = index === times.length - 1 ? right : (xAt(index) + xAt(index + 1)) / 2;
         return <rect key={`hit-${time}`} x={previousX} y={top} width={Math.max(1, nextX - previousX)} height={bottom - top} fill="transparent" className="kbi-line-time-hit" onMouseEnter={() => setHoveredTimeIndex(index)}/>;
       })}
-      {times.map((time, index) => <text key={time} x={xAt(index)} y="326" textAnchor="middle">{time}</text>)}
+      {times.map((time, index) => visibleTimeLabelIndexes.has(index) ? <text key={time} x={xAt(index)} y="326" textAnchor="middle">{time}</text> : null)}
       {hoveredTimeIndex !== null && <g className="kbi-line-tooltip" pointerEvents="none">
         <line x1={hoveredX} x2={hoveredX} y1={top} y2={bottom} className="kbi-line-hover-guide"/>
         <rect x={tooltipX} y={tooltipY} width={tooltipWidth} height={tooltipHeight} rx="4"/>
@@ -408,10 +459,11 @@ function StatsBarChart({ rows, mode, dimension, includeFailedAmount = true, tota
   const entries = Array.from(rows.reduce((groups, row) => {
     const id = entityId(row);
     const existing = groups.get(id);
-    const values = metrics.map((item, index) => (existing?.values[index] ?? 0) + metricValue(row, item.label));
-    groups.set(id, { id, label:entityName(row), values, total:values[0] });
+    const playerGameKeys = Array.from(new Set([...(existing?.playerGameKeys ?? []), ...row.playerGameKeys]));
+    const values = metrics.map((item, index) => item.label === '订单人数' ? playerGameKeys.length : (existing?.values[index] ?? 0) + metricValue(row, item.label));
+    groups.set(id, { id, label:entityName(row), values, total:values[0], playerGameKeys });
     return groups;
-  }, new Map<string, { id:string; label:string; values:number[]; total:number }>()).values()).sort((left, right) => right.total - left.total).slice(0, 15);
+  }, new Map<string, { id:string; label:string; values:number[]; total:number; playerGameKeys:string[] }>()).values()).sort((left, right) => right.total - left.total).slice(0, 15);
   const visibleMetricIndexes = metrics.map((item, index) => visibleMetrics.includes(item.label) ? index : -1).filter((index) => index >= 0);
   const max = Math.max(...entries.flatMap((entry) => visibleMetricIndexes.map((metricIndex) => entry.values[metricIndex])), 1);
   const left = 76;
@@ -461,7 +513,7 @@ function StatsBarChart({ rows, mode, dimension, includeFailedAmount = true, tota
   </div>;
 }
 
-export default function RechargeStats({ page, setPage, showToast }: { page: RechargeStatsPageId; setPage: (pageId: string) => void; showToast: (message: string) => void }) {
+export default function RechargeStats({ page, setPage, showToast, onAnnotationLayerChange }: { page: RechargeStatsPageId; setPage: (pageId: string) => void; showToast: (message: string, type?: 'success' | 'error') => void; onAnnotationLayerChange?: (layer: 'page' | 'drawer' | 'modal') => void }) {
   const current = pageOptions.find((option) => option.id === page) ?? pageOptions[0];
   const mode = current.mode;
   const isPaidDownload = page.startsWith('mobile-paid-download-');
@@ -476,6 +528,11 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
   const [currentPage, setCurrentPage] = useState(1);
   const [orderDrill, setOrderDrill] = useState<'count' | 'people' | null>(null);
   const [orderDrillRow, setOrderDrillRow] = useState<StatRow | null>(null);
+
+  useEffect(() => {
+    onAnnotationLayerChange?.(drawerOpen ? 'drawer' : orderDrill ? 'modal' : 'page');
+    return () => onAnnotationLayerChange?.('page');
+  }, [drawerOpen, onAnnotationLayerChange, orderDrill]);
 
   const filteredRows = useMemo(() => statRows.filter((row) => {
     const gameText = `${row.gameId} ${row.gameName}`.toLowerCase();
@@ -509,7 +566,12 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
         couponCount: existing.couponCount + row.couponCount,
         couponFace: existing.couponFace + row.couponFace,
         orderCount: existing.orderCount + row.orderCount,
-        orderPeople: existing.orderPeople + row.orderPeople,
+        orderPeople: new Set([...existing.playerGameKeys, ...row.playerGameKeys]).size,
+        playerGameKeys: Array.from(new Set([...existing.playerGameKeys, ...row.playerGameKeys])),
+        purchasedOrderCount: existing.purchasedOrderCount + row.purchasedOrderCount,
+        giftedOrderCount: existing.giftedOrderCount + row.giftedOrderCount,
+        purchasedPlayerGameKeys: Array.from(new Set([...existing.purchasedPlayerGameKeys, ...row.purchasedPlayerGameKeys])),
+        giftedPlayerGameKeys: Array.from(new Set([...existing.giftedPlayerGameKeys, ...row.giftedPlayerGameKeys])),
         successOrders: existing.successOrders + row.successOrders,
         failedOrders: existing.failedOrders + row.failedOrders,
         abnormalOrders: existing.abnormalOrders + row.abnormalOrders,
@@ -520,7 +582,8 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
     return rows.sort((left, right) => right.time.localeCompare(left.time));
   }, [filteredRows, filters.startDate, filters.endDate, mode, precision, rangeMode]);
 
-  const totals = useMemo(() => displayRows.reduce((total, row) => ({
+  const totals = useMemo(() => {
+    const summed = displayRows.reduce((total, row) => ({
     pendingAmount: total.pendingAmount + row.pendingAmount,
     successAmount: total.successAmount + row.successAmount,
     failedAmount: total.failedAmount + row.failedAmount,
@@ -528,8 +591,17 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
     couponCount: total.couponCount + row.couponCount,
     couponFace: total.couponFace + row.couponFace,
     orderCount: total.orderCount + row.orderCount,
-    orderPeople: total.orderPeople + row.orderPeople,
-  }), { pendingAmount:0, successAmount:0, failedAmount:0, subsidyAmount:0, couponCount:0, couponFace:0, orderCount:0, orderPeople:0 }), [displayRows]);
+    orderPeople: 0,
+    purchasedOrderCount: total.purchasedOrderCount + row.purchasedOrderCount,
+    giftedOrderCount: total.giftedOrderCount + row.giftedOrderCount,
+  }), { pendingAmount:0, successAmount:0, failedAmount:0, subsidyAmount:0, couponCount:0, couponFace:0, orderCount:0, orderPeople:0, purchasedOrderCount:0, giftedOrderCount:0 });
+    return {
+      ...summed,
+      orderPeople: new Set(displayRows.flatMap((row) => row.playerGameKeys)).size,
+      purchasedOrderPeople: new Set(displayRows.flatMap((row) => row.purchasedPlayerGameKeys)).size,
+      giftedOrderPeople: new Set(displayRows.flatMap((row) => row.giftedPlayerGameKeys)).size,
+    };
+  }, [displayRows]);
   const totalPages = Math.max(1, Math.ceil(displayRows.length / pageSize));
   const paginatedRows = useMemo(() => displayRows.slice((currentPage - 1) * pageSize, currentPage * pageSize), [currentPage, displayRows, pageSize]);
   useEffect(() => setCurrentPage(1), [filters, mode, pageSize, precision, rangeMode]);
@@ -542,11 +614,12 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
     setOrderDrill(type);
     setOrderDrillRow(row);
   };
-  const orderDrillTotal = orderDrill === 'count'
-    ? (orderDrillRow?.orderCount ?? totals.orderCount)
-    : (orderDrillRow?.orderPeople ?? totals.orderPeople);
-  const giftedOrderMetric = Math.round(orderDrillTotal * .08);
-  const purchasedOrderMetric = orderDrillTotal - giftedOrderMetric;
+  const purchasedOrderMetric = orderDrill === 'count'
+    ? (orderDrillRow?.purchasedOrderCount ?? totals.purchasedOrderCount)
+    : (orderDrillRow?.purchasedPlayerGameKeys.length ?? totals.purchasedOrderPeople);
+  const giftedOrderMetric = orderDrill === 'count'
+    ? (orderDrillRow?.giftedOrderCount ?? totals.giftedOrderCount)
+    : (orderDrillRow?.giftedPlayerGameKeys.length ?? totals.giftedOrderPeople);
   const timeText = (time: string) => time.includes('—') ? time : precision === 'year' ? time.slice(0, 4) : precision === 'month' ? time.slice(0, 7) : time;
   const chartMetrics = isIncomeStats
     ? ['总收入']
@@ -597,7 +670,12 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
         couponCount: existing.couponCount + row.couponCount,
         couponFace: existing.couponFace + row.couponFace,
         orderCount: existing.orderCount + row.orderCount,
-        orderPeople: existing.orderPeople + row.orderPeople,
+        orderPeople: new Set([...existing.playerGameKeys, ...row.playerGameKeys]).size,
+        playerGameKeys: Array.from(new Set([...existing.playerGameKeys, ...row.playerGameKeys])),
+        purchasedOrderCount: existing.purchasedOrderCount + row.purchasedOrderCount,
+        giftedOrderCount: existing.giftedOrderCount + row.giftedOrderCount,
+        purchasedPlayerGameKeys: Array.from(new Set([...existing.purchasedPlayerGameKeys, ...row.purchasedPlayerGameKeys])),
+        giftedPlayerGameKeys: Array.from(new Set([...existing.giftedPlayerGameKeys, ...row.giftedPlayerGameKeys])),
         successOrders: existing.successOrders + row.successOrders,
         failedOrders: existing.failedOrders + row.failedOrders,
         abnormalOrders: existing.abnormalOrders + row.abnormalOrders,
@@ -637,39 +715,39 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
     if (!displayRows.length) return null;
     if (isIncomeStats && mode === 'game') return <tr className="kbi-total-row"><td>查询总计</td><td></td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(Math.round(totals.successAmount * .28 / 10) * 10)}</td><td className="is-number">{money(totals.successAmount + Math.round(totals.successAmount * .28 / 10) * 10)}</td></tr>;
     if (isIncomeStats && mode === 'developer') return <tr className="kbi-total-row"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(Math.round(totals.successAmount * .28 / 10) * 10)}</td><td className="is-number">{money(totals.successAmount + Math.round(totals.successAmount * .28 / 10) * 10)}</td></tr>;
-    if (isPaidDownload && mode === 'game') return <tr className="kbi-total-row"><td>查询总计</td><td colSpan={3}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.couponCount.toLocaleString('zh-CN')}</td><td className="is-number">{money(totals.couponFace)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
-    if (isPaidDownload && mode === 'developer') return <tr className="kbi-total-row"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
-    if (isPaidDownload && mode === 'summary') return <tr className="kbi-total-row"><td>查询总计</td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
-    if (mode === 'game') return <tr className="kbi-total-row"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.couponCount.toLocaleString('zh-CN')}</td><td className="is-number">{money(totals.couponFace)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
-    if (mode === 'developer') return <tr className="kbi-total-row"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
-    return <tr className="kbi-total-row"><td>查询总计</td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
+    if (isPaidDownload && mode === 'game') return <tr className="kbi-total-row" data-annotation-id="paid-download-stats-total"><td>查询总计</td><td colSpan={3}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.couponCount.toLocaleString('zh-CN')}</td><td className="is-number">{money(totals.couponFace)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
+    if (isPaidDownload && mode === 'developer') return <tr className="kbi-total-row" data-annotation-id="paid-download-stats-total"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
+    if (isPaidDownload && mode === 'summary') return <tr className="kbi-total-row" data-annotation-id="paid-download-stats-total"><td>查询总计</td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('count', null)}>{totals.orderCount.toLocaleString('zh-CN')}</button></td><td className="is-number"><button className="kbi-drill" onClick={() => openOrderDrill('people', null)}>{totals.orderPeople.toLocaleString('zh-CN')}</button></td></tr>;
+    if (mode === 'game') return <tr className="kbi-total-row" data-annotation-id="recharge-stats-total"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.couponCount.toLocaleString('zh-CN')}</td><td className="is-number">{money(totals.couponFace)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
+    if (mode === 'developer') return <tr className="kbi-total-row" data-annotation-id="recharge-stats-total"><td>查询总计</td><td colSpan={2}></td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
+    return <tr className="kbi-total-row" data-annotation-id="recharge-stats-total"><td>查询总计</td><td className="is-number">{money(totals.pendingAmount)}</td><td className="is-number">{money(totals.successAmount)}</td><td className="is-number">{money(totals.failedAmount)}</td><td className="is-number">{money(totals.subsidyAmount)}</td><td className="is-number">{percent(totals.subsidyAmount, totals.pendingAmount)}</td><td className="is-number">{totals.orderCount.toLocaleString('zh-CN')}</td><td className="is-number">{totals.orderPeople.toLocaleString('zh-CN')}</td></tr>;
   };
 
   return <>
     <section className="kbi-card">
       <div className="kbi-querybar kbi-stats-querybar">
         <StatsViewSelect value={page} onChange={setPage}/>
-        <button className="kbi-chart-button" aria-label="打开统计图" title="打开统计图" onClick={() => setDrawerOpen(true)}><ChartLine size={19}/></button>
+        <button className="kbi-chart-button" data-annotation-id="recharge-stats-chart-entry" aria-label="打开统计图" title="打开统计图" onClick={() => { if (!displayRows.length) { showToast('暂无图表数据', 'error'); return; } setDrawerOpen(true); }}><ChartLine size={19}/></button>
         <span className="kbi-query-divider" aria-hidden="true"></span>
-        <StatsCompactSelect label="展示方式" className="kbi-range-mode-select" value={rangeMode} options={[{ value:'interval', label:'周期明细' }, { value:'cumulative', label:'区间汇总' }]} onChange={(value) => setRangeMode(value as 'interval' | 'cumulative')}/>
-        <StatsCompactSelect label="时间精度" className="kbi-precision-select" value={precision} options={[{ value:'day', label:'按日' }, { value:'month', label:'按月' }, { value:'year', label:'按年' }]} onChange={setPrecision}/>
-        <StatsDateRangePicker start={filters.startDate} end={filters.endDate} precision={precision} onChange={(startDate, endDate) => setFilters((currentFilters) => ({ ...currentFilters, startDate, endDate }))}/>
-        {(mode === 'game' || mode === 'summary') && <input aria-label="游戏ID / 名称" value={filters.game} onChange={(event) => setFilter('game', event.target.value)} placeholder="游戏ID / 名称"/>}
-        {!isIncomeStats && (mode === 'game' || mode === 'developer' || mode === 'summary') && <input aria-label="开发者ID / 名称" value={filters.developer} onChange={(event) => setFilter('developer', event.target.value)} placeholder="开发者ID / 名称"/>}
+        <StatsCompactSelect label="展示方式" className="kbi-range-mode-select" annotationId="recharge-stats-range-mode" value={rangeMode} options={[{ value:'interval', label:'周期明细' }, { value:'cumulative', label:'区间汇总' }]} onChange={(value) => setRangeMode(value as 'interval' | 'cumulative')}/>
+        <StatsCompactSelect label="时间精度" className="kbi-precision-select" annotationId="recharge-stats-precision" value={precision} options={[{ value:'day', label:'按日' }, { value:'month', label:'按月' }, { value:'year', label:'按年' }]} onChange={setPrecision}/>
+        <StatsDateRangePicker start={filters.startDate} end={filters.endDate} precision={precision} annotationId="recharge-stats-date" limitRange={!isPaidDownload && !isIncomeStats} onChange={(startDate, endDate) => setFilters((currentFilters) => ({ ...currentFilters, startDate, endDate }))}/>
+        {(mode === 'game' || mode === 'summary') && <input data-annotation-id="recharge-stats-query" aria-label="游戏ID / 名称" value={filters.game} onChange={(event) => setFilter('game', event.target.value)} placeholder="游戏ID / 名称"/>}
+        {!isIncomeStats && (mode === 'game' || mode === 'developer' || mode === 'summary') && <input data-annotation-id={mode === 'developer' ? 'recharge-stats-query' : undefined} aria-label="开发者ID / 名称" value={filters.developer} onChange={(event) => setFilter('developer', event.target.value)} placeholder="开发者ID / 名称"/>}
         {(mode === 'developer' || (!isIncomeStats && (mode === 'game' || mode === 'summary'))) && <input aria-label="公司 / 个人名称" value={filters.company} onChange={(event) => setFilter('company', event.target.value)} placeholder="公司 / 个人名称"/>}
-        <button className="kbi-btn kbi-btn-primary" onClick={() => showToast(`已创建${current.label}导出任务（原型示意）`)}>导出</button>
+        <button className="kbi-btn kbi-btn-primary" data-annotation-id="recharge-stats-export" disabled={!displayRows.length} onClick={() => showToast('表格正在导出，导出成功后可在下载列表查看')}>导出</button>
       </div>
 
-      <div className="kbi-table-wrap kbi-stats-table-wrap">
+      <div className="kbi-table-wrap kbi-stats-table-wrap" data-annotation-id="recharge-stats-table">
         <table className={`kbi-stats-table kbi-stats-table-${mode}`}>
           <thead>{isIncomeStats && mode === 'game' ? <tr><th>时间</th><th>游戏ID / 名称</th><th className="is-number">充值待结算金额</th><th className="is-number">付费下载待结算金额</th><th className="is-number">总收入</th></tr>
             : isIncomeStats && mode === 'developer' ? <tr><th>时间</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number">充值待结算金额</th><th className="is-number">付费下载待结算金额</th><th className="is-number">总收入</th></tr>
-            : isPaidDownload && mode === 'game' ? <tr><th>时间</th><th>游戏ID / 名称</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">券使用数</th><th className="is-number">券面额</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>
-            : isPaidDownload && mode === 'developer' ? <tr><th>时间</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>
-            : isPaidDownload && mode === 'summary' ? <tr><th>时间</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>
-            : mode === 'game' ? <tr><th>时间</th><th>游戏ID / 名称</th><th>开发者ID / 名称</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">券使用数</th><th className="is-number">券面额</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>
-            : mode === 'developer' ? <tr><th>时间</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>
-            : <tr><th>时间</th><th className="is-number">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">订单次数</th><th className="is-number">订单人数</th></tr>}</thead>
+            : isPaidDownload && mode === 'game' ? <tr><th>时间</th><th>游戏ID / 名称</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number" data-annotation-id="paid-download-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">券使用数</th><th className="is-number">券面额</th><th className="is-number" data-annotation-id="paid-download-stats-order-entry">订单次数</th><th className="is-number">订单人数</th></tr>
+            : isPaidDownload && mode === 'developer' ? <tr><th>时间</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number" data-annotation-id="paid-download-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number" data-annotation-id="paid-download-stats-order-entry">订单次数</th><th className="is-number">订单人数</th></tr>
+            : isPaidDownload && mode === 'summary' ? <tr><th>时间</th><th className="is-number" data-annotation-id="paid-download-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number" data-annotation-id="paid-download-stats-order-entry">订单次数</th><th className="is-number">订单人数</th></tr>
+            : mode === 'game' ? <tr><th>时间</th><th>游戏ID / 名称</th><th>开发者ID / 名称</th><th className="is-number" data-annotation-id="recharge-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number">券使用数</th><th className="is-number">券面额</th><th className="is-number" data-annotation-id="recharge-stats-order-metrics">订单次数</th><th className="is-number">订单人数</th></tr>
+            : mode === 'developer' ? <tr><th>时间</th><th>开发者ID / 名称</th><th>公司 / 个人名称</th><th className="is-number" data-annotation-id="recharge-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number" data-annotation-id="recharge-stats-order-metrics">订单次数</th><th className="is-number">订单人数</th></tr>
+            : <tr><th>时间</th><th className="is-number" data-annotation-id="recharge-stats-amount-metrics">待结算金额</th><th className="is-number">成功金额</th><th className="is-number">失败金额</th><th className="is-number">平台补贴金额</th><th className="is-number">平台补贴占比</th><th className="is-number" data-annotation-id="recharge-stats-order-metrics">订单次数</th><th className="is-number">订单人数</th></tr>}</thead>
           <tbody>
             {renderTotalRow()}
             {paginatedRows.map((row, index) => isIncomeStats && mode === 'game' ? <tr key={`${row.time}-${row.gameId}-${index}`}><td>{timeText(row.time)}</td><td>{row.gameId} / {row.gameName}</td><td className="is-number">{money(row.successAmount)}</td><td className="is-number">{money(Math.round(row.successAmount * .28 / 10) * 10)}</td><td className="is-number">{money(row.successAmount + Math.round(row.successAmount * .28 / 10) * 10)}</td></tr>
@@ -687,9 +765,9 @@ export default function RechargeStats({ page, setPage, showToast }: { page: Rech
       <StatsPagination count={displayRows.length} pageSize={pageSize} currentPage={currentPage} onPageSizeChange={setPageSize} onPageChange={setCurrentPage}/>
     </section>
 
-    {drawerOpen && <div className="kbi-drawer-mask" onMouseDown={() => setDrawerOpen(false)}><aside className="kbi-chart-drawer" role="dialog" aria-modal="true" aria-label="统计图" onMouseDown={(event) => event.stopPropagation()}><header><strong>统计图</strong><button aria-label="关闭统计图" onClick={() => setDrawerOpen(false)}><X size={18}/></button></header><div className="kbi-chart-drawer-body"><div className="kbi-chart-rule">{chartRuleLines.map((line) => <p key={line}>{line}</p>)}</div><div className="kbi-chart-toolbar"><div className="kbi-chart-context"><strong>{chartPeriod}{singleEntityName && <>　{singleEntityName}</>}</strong></div>{rangeMode === 'interval' ? <select aria-label="图表指标" value={metric} onChange={(event) => setMetric(event.target.value)}>{chartMetrics.map((option) => <option key={option}>{option}</option>)}</select> : !isIncomeStats && <select aria-label="柱状图维度" value={barDimension} onChange={(event) => setBarDimension(event.target.value as 'income' | 'orders')}><option value="income">收入</option><option value="orders">订单数</option></select>}</div>{rangeMode === 'cumulative' ? <StatsBarChart rows={filteredRows} mode={mode} dimension={barDimension} includeFailedAmount={!isPaidDownload} totalIncomeOnly={isIncomeStats}/> : <StatsChart rows={chartRows} mode={mode} metric={metric} times={chartTimes}/>}</div></aside></div>}
+    {drawerOpen && <div className="kbi-drawer-mask" onMouseDown={() => setDrawerOpen(false)}><aside className="kbi-chart-drawer" role="dialog" aria-modal="true" aria-label="统计图" onMouseDown={(event) => event.stopPropagation()}><header><strong data-annotation-id="recharge-stats-chart-drawer">统计图</strong><button aria-label="关闭统计图" onClick={() => setDrawerOpen(false)}><X size={18}/></button></header><div className="kbi-chart-drawer-body"><div className="kbi-chart-rule">{chartRuleLines.map((line) => <p key={line}>{line}</p>)}</div><div className="kbi-chart-toolbar"><div className="kbi-chart-context"><strong>{chartPeriod}{singleEntityName && <>　{singleEntityName}</>}</strong></div>{rangeMode === 'interval' ? <select aria-label="图表指标" value={metric} onChange={(event) => setMetric(event.target.value)}>{chartMetrics.map((option) => <option key={option}>{option}</option>)}</select> : !isIncomeStats && <select aria-label="柱状图维度" value={barDimension} onChange={(event) => setBarDimension(event.target.value as 'income' | 'orders')}><option value="income">收入</option><option value="orders">订单数</option></select>}</div>{rangeMode === 'cumulative' ? <StatsBarChart rows={filteredRows} mode={mode} dimension={barDimension} includeFailedAmount={!isPaidDownload} totalIncomeOnly={isIncomeStats}/> : <StatsChart rows={chartRows} mode={mode} metric={metric} times={chartTimes}/>}</div></aside></div>}
 
-    {isPaidDownload && orderDrill && <div className="kbi-mask" onMouseDown={() => setOrderDrill(null)}><section className="kbi-modal" role="dialog" aria-modal="true" aria-label={orderDrill === 'count' ? '订单次数详情' : '订单人数详情'} onMouseDown={(event) => event.stopPropagation()}><header><button aria-label="关闭弹窗" onClick={() => setOrderDrill(null)}><X size={18}/></button></header><div className="kbi-modal-body"><dl><div className="kbi-modal-table-head"><dt>名词</dt><dd>说明</dd></div>{orderDrill === 'count' ? <><div><dt>购买订单次数</dt><dd>{purchasedOrderMetric.toLocaleString('zh-CN')}</dd></div><div><dt>获赠订单次数</dt><dd>{giftedOrderMetric.toLocaleString('zh-CN')}</dd></div></> : <><div><dt>购买订单人数</dt><dd>{purchasedOrderMetric.toLocaleString('zh-CN')}</dd></div><div><dt>获赠订单人数</dt><dd>{giftedOrderMetric.toLocaleString('zh-CN')}</dd></div></>}</dl></div></section></div>}
+    {isPaidDownload && orderDrill && <div className="kbi-mask" onMouseDown={() => setOrderDrill(null)}><section data-annotation-id={orderDrill === 'count' ? 'paid-download-stats-order-count-modal' : 'paid-download-stats-order-people-modal'} className="kbi-modal" role="dialog" aria-modal="true" aria-label={orderDrill === 'count' ? '订单次数详情' : '订单人数详情'} onMouseDown={(event) => event.stopPropagation()}><header><button aria-label="关闭弹窗" onClick={() => setOrderDrill(null)}><X size={18}/></button></header><div className="kbi-modal-body"><dl><div className="kbi-modal-table-head"><dt>名词</dt><dd>说明</dd></div>{orderDrill === 'count' ? <><div><dt>购买订单次数</dt><dd>{purchasedOrderMetric.toLocaleString('zh-CN')}</dd></div><div><dt>获赠订单次数</dt><dd>{giftedOrderMetric.toLocaleString('zh-CN')}</dd></div></> : <><div><dt>购买订单人数</dt><dd>{purchasedOrderMetric.toLocaleString('zh-CN')}</dd></div><div><dt>获赠订单人数</dt><dd>{giftedOrderMetric.toLocaleString('zh-CN')}</dd></div></>}</dl></div></section></div>}
 
   </>;
 }

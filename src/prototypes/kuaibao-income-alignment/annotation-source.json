@@ -1,0 +1,743 @@
+{
+  "documentVersion": 1,
+  "format": "axhub-annotation-source",
+  "data": {
+    "version": 2,
+    "prototypeName": "kuaibao-income-alignment",
+    "pageId": "mobile-recharge-formal",
+    "updatedAt": 1786610400000,
+    "nodes": [
+      {
+        "id": "mobile-recharge-formal-order-type",
+        "index": 1,
+        "title": "正式订单数据域",
+        "pageId": "mobile-recharge-formal",
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-order-type\"]"], "fingerprint": "div|data-annotation-id=recharge-detail-order-type", "path": [] },
+        "aiPrompt": "说明正式订单与测试订单的数据域关系。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-test-order-type",
+        "index": 1,
+        "title": "测试订单数据域",
+        "pageId": "mobile-recharge-test",
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-order-type\"]"], "fingerprint": "div|data-annotation-id=recharge-detail-order-type", "path": [] },
+        "aiPrompt": "说明测试订单独立查询、统计和收入范围。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-query",
+        "index": 2,
+        "title": "充值明细查询条件",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-query\"]"], "fingerprint": "input|data-annotation-id=recharge-detail-query", "path": [] },
+        "aiPrompt": "说明查询条件、组合关系、即时刷新和空结果。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-date",
+        "index": 3,
+        "title": "交易时间范围",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-date\"]"], "fingerprint": "div|data-annotation-id=recharge-detail-date", "path": [] },
+        "aiPrompt": "说明明细页日期默认值、范围和未来日期限制。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-export",
+        "index": 4,
+        "title": "导出",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-export\"]"], "fingerprint": "button|data-annotation-id=recharge-detail-export", "path": [] },
+        "aiPrompt": "说明导出条件、范围和反馈。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-table",
+        "index": 5,
+        "title": "充值订单列表",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-table\"]"], "fingerprint": "div|data-annotation-id=recharge-detail-table", "path": [] },
+        "aiPrompt": "说明列表字段来源、排序、格式和空值规则。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-total",
+        "index": 6,
+        "title": "查询总计",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-total\"]"], "fingerprint": "tr|data-annotation-id=recharge-detail-total", "path": [] },
+        "aiPrompt": "说明查询总计范围、金额公式和空数据表现。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-status",
+        "index": 7,
+        "title": "订单状态",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-status\"]"], "fingerprint": "th|data-annotation-id=recharge-detail-status", "path": [] },
+        "aiPrompt": "说明订单状态取值和展示样式。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-channel-filter",
+        "index": 8,
+        "title": "支付渠道筛选",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-channel-filter\"]"], "fingerprint": "button|data-annotation-id=recharge-detail-channel-filter", "path": [] },
+        "aiPrompt": "说明支付渠道列表内筛选。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-order-entry",
+        "index": 9,
+        "title": "订单详情入口（点击订单号）",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-order-drill-entry\"]"], "fingerprint": "th|data-annotation-id=recharge-detail-order-drill-entry", "path": [] },
+        "aiPrompt": "说明订单号下钻入口。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-order-modal",
+        "index": 10,
+        "title": "订单详情弹窗",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-order-modal\"]"], "fingerprint": "section|data-annotation-id=recharge-detail-order-modal", "path": [] },
+        "aiPrompt": "说明订单详情弹窗字段、来源和关闭行为。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-total-subsidy-entry",
+        "index": 11,
+        "title": "总计平台补贴入口（点击总计金额）",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-total-subsidy-entry\"]"], "fingerprint": "td|data-annotation-id=recharge-detail-total-subsidy-entry", "path": [] },
+        "aiPrompt": "说明总计行平台补贴下钻入口。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-total-subsidy-modal",
+        "index": 12,
+        "title": "总计平台补贴弹窗",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-total-subsidy-modal\"]"], "fingerprint": "section|data-annotation-id=recharge-detail-total-subsidy-modal", "path": [] },
+        "aiPrompt": "说明总计平台补贴弹窗汇总范围。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-row-subsidy-entry",
+        "index": 13,
+        "title": "订单平台补贴入口（点击数据行金额）",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-row-subsidy-entry\"]"], "fingerprint": "th|data-annotation-id=recharge-detail-row-subsidy-entry", "path": [] },
+        "aiPrompt": "说明数据行平台补贴下钻入口和空值。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-detail-row-subsidy-modal",
+        "index": 14,
+        "title": "订单平台补贴弹窗",
+        "pageId": ["mobile-recharge-formal", "mobile-recharge-test"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-detail-row-subsidy-modal\"]"], "fingerprint": "section|data-annotation-id=recharge-detail-row-subsidy-modal", "path": [] },
+        "aiPrompt": "说明单笔订单平台补贴弹窗字段和来源。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-view",
+        "index": 1,
+        "title": "充值统计子表切换",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-view\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-view", "path": [] },
+        "aiPrompt": "说明三个充值统计子表的数据粒度和字段差异。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-chart-entry",
+        "index": 2,
+        "title": "统计图入口",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-chart-entry\"]"], "fingerprint": "button|data-annotation-id=recharge-stats-chart-entry", "path": [] },
+        "aiPrompt": "说明图表抽屉入口和空数据反馈。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-range-mode",
+        "index": 3,
+        "title": "周期明细与区间汇总",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-range-mode\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-range-mode", "path": [] },
+        "aiPrompt": "说明两种数据展示方式的聚合差异。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-precision",
+        "index": 4,
+        "title": "统计时间粒度",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-precision\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-precision", "path": [] },
+        "aiPrompt": "说明按日、按月和按年。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-date",
+        "index": 5,
+        "title": "统计时间范围",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-date\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-date", "path": [] },
+        "aiPrompt": "说明统计页默认日期、快速选择和未来日期限制。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-query",
+        "index": 6,
+        "title": "统计对象查询条件",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-query\"]"], "fingerprint": "input|data-annotation-id=recharge-stats-query", "path": [] },
+        "aiPrompt": "说明各子表查询字段、组合关系和即时刷新。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-export",
+        "index": 7,
+        "title": "导出",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-export\"]"], "fingerprint": "button|data-annotation-id=recharge-stats-export", "path": [] },
+        "aiPrompt": "说明统计列表导出范围、文件名和反馈。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-table",
+        "index": 8,
+        "title": "充值统计列表",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-table\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-table", "path": [] },
+        "aiPrompt": "说明列表字段、排序、空值和子表差异。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#4165D7",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-total",
+        "index": 9,
+        "title": "查询总计",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-total\"]"], "fingerprint": "tr|data-annotation-id=recharge-stats-total", "path": [] },
+        "aiPrompt": "说明总计范围、重新计算和去重规则。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-amount-metrics",
+        "index": 10,
+        "title": "金额与补贴指标",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-amount-metrics\"]"], "fingerprint": "th|data-annotation-id=recharge-stats-amount-metrics", "path": [] },
+        "aiPrompt": "说明金额、补贴、券和比例公式。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-order-metrics",
+        "index": 11,
+        "title": "订单次数与订单人数",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-order-metrics\"]"], "fingerprint": "th|data-annotation-id=recharge-stats-order-metrics", "path": [] },
+        "aiPrompt": "说明成功订单统计和玩家ID加游戏ID去重规则。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#2E8B57",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-recharge-stats-chart-drawer",
+        "index": 12,
+        "title": "统计图抽屉",
+        "pageId": ["mobile-recharge-game-stats", "mobile-recharge-developer-stats", "mobile-recharge-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-chart-drawer\"]"], "fingerprint": "strong|data-annotation-id=recharge-stats-chart-drawer", "path": [] },
+        "aiPrompt": "说明折线图、柱状图、Top15、指标切换、悬浮和关闭行为。",
+        "annotationText": "",
+        "hasMarkdown": true,
+        "color": "#D97706",
+        "images": [],
+        "createdAt": 1786610400000,
+        "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-query", "index": 1, "title": "付费下载明细查询条件", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-query\"]"], "fingerprint": "input|data-annotation-id=paid-download-detail-query", "path": [] },
+        "aiPrompt": "说明付费下载明细查询字段、组合关系和成功数据范围。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-date", "index": 2, "title": "购买时间范围", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-date\"]"], "fingerprint": "div|data-annotation-id=paid-download-detail-date", "path": [] },
+        "aiPrompt": "说明明细页日期默认值和选择规则。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-export", "index": 3, "title": "导出", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-export\"]"], "fingerprint": "button|data-annotation-id=paid-download-detail-export", "path": [] },
+        "aiPrompt": "说明付费下载明细导出范围、文件名和反馈。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-table", "index": 4, "title": "付费下载明细列表", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-table\"]"], "fingerprint": "table|data-annotation-id=paid-download-detail-table", "path": [] },
+        "aiPrompt": "说明列表字段、数据来源、排序、格式和空值。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-total", "index": 5, "title": "查询总计", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-total\"]"], "fingerprint": "tr|data-annotation-id=paid-download-detail-total", "path": [] },
+        "aiPrompt": "说明购买金额和平台补贴金额的总计范围。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-channel", "index": 6, "title": "支付渠道筛选", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-channel\"]"], "fingerprint": "button|data-annotation-id=paid-download-detail-channel", "path": [] },
+        "aiPrompt": "说明支付渠道筛选项和联动关系。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-total-subsidy-entry", "index": 7, "title": "总计平台补贴入口", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-total-subsidy-entry\"]"], "fingerprint": "button|data-annotation-id=paid-download-detail-total-subsidy-entry", "path": [] },
+        "aiPrompt": "说明总计行平台补贴入口的显示和点击行为。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-total-subsidy-modal", "index": 8, "title": "总计平台补贴弹窗", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-total-subsidy-modal\"]"], "fingerprint": "section|data-annotation-id=paid-download-detail-total-subsidy-modal", "path": [] },
+        "aiPrompt": "说明总计补贴弹窗字段、计算和关闭行为。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-row-subsidy-entry", "index": 9, "title": "订单平台补贴入口", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-row-subsidy-entry\"]"], "fingerprint": "button|data-annotation-id=paid-download-detail-row-subsidy-entry", "path": [] },
+        "aiPrompt": "说明数据行平台补贴入口的显示和点击行为。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-detail-row-subsidy-modal", "index": 10, "title": "订单平台补贴弹窗", "pageId": "mobile-paid-download-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-detail-row-subsidy-modal\"]"], "fingerprint": "section|data-annotation-id=paid-download-detail-row-subsidy-modal", "path": [] },
+        "aiPrompt": "说明单订单补贴弹窗字段、单券规则和关闭行为。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-view", "index": 1, "title": "付费下载统计子表", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-view\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-view", "path": [] },
+        "aiPrompt": "说明游戏、开发者和汇总三个子表差异。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-chart-entry", "index": 2, "title": "统计图入口", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-chart-entry\"]"], "fingerprint": "button|data-annotation-id=recharge-stats-chart-entry", "path": [] },
+        "aiPrompt": "说明图表入口、无数据提示和抽屉打开。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-range-mode", "index": 3, "title": "周期明细与区间汇总", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-range-mode\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-range-mode", "path": [] },
+        "aiPrompt": "说明两种展示方式的数据颗粒度。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-precision", "index": 4, "title": "统计时间粒度", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-precision\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-precision", "path": [] },
+        "aiPrompt": "说明按日、按月和按年。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-date", "index": 5, "title": "统计时间范围", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-date\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-date", "path": [] },
+        "aiPrompt": "说明统计页默认日期和选择规则。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-query", "index": 6, "title": "统计对象查询", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-query\"]"], "fingerprint": "input|data-annotation-id=recharge-stats-query", "path": [] },
+        "aiPrompt": "说明各子表查询字段和条件关系。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-export", "index": 7, "title": "导出", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-export\"]"], "fingerprint": "button|data-annotation-id=recharge-stats-export", "path": [] },
+        "aiPrompt": "说明导出范围、文件名和反馈。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-table", "index": 8, "title": "付费下载统计列表", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-table\"]"], "fingerprint": "div|data-annotation-id=recharge-stats-table", "path": [] },
+        "aiPrompt": "说明三个列表字段、成功数据范围和排序。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-total", "index": 9, "title": "查询总计", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-stats-total\"]"], "fingerprint": "tr|data-annotation-id=paid-download-stats-total", "path": [] },
+        "aiPrompt": "说明总计范围、公式和人数重新去重。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-amount-metrics", "index": 10, "title": "金额与优惠券指标", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-stats-amount-metrics\"]"], "fingerprint": "th|data-annotation-id=paid-download-stats-amount-metrics", "path": [] },
+        "aiPrompt": "说明待结算、成功、补贴、占比和优惠券口径。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-order-entry", "index": 11, "title": "订单指标下钻入口", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-stats-order-entry\"]"], "fingerprint": "th|data-annotation-id=paid-download-stats-order-entry", "path": [] },
+        "aiPrompt": "说明订单次数、订单人数的计算和下钻入口。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-order-count-modal", "index": 12, "title": "订单次数弹窗", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-stats-order-count-modal\"]"], "fingerprint": "section|data-annotation-id=paid-download-stats-order-count-modal", "path": [] },
+        "aiPrompt": "说明购买与获赠订单次数的实际数据拆分。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-order-people-modal", "index": 13, "title": "订单人数弹窗", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"paid-download-stats-order-people-modal\"]"], "fingerprint": "section|data-annotation-id=paid-download-stats-order-people-modal", "path": [] },
+        "aiPrompt": "说明购买与获赠订单人数及去重。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mobile-paid-download-stats-chart-drawer", "index": 14, "title": "统计图抽屉", "pageId": ["mobile-paid-download-game-stats", "mobile-paid-download-developer-stats", "mobile-paid-download-summary-stats"],
+        "locator": { "selectors": ["[data-annotation-id=\"recharge-stats-chart-drawer\"]"], "fingerprint": "strong|data-annotation-id=recharge-stats-chart-drawer", "path": [] },
+        "aiPrompt": "说明付费下载统计折线图、柱状图和Top15规则。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-query", "index": 1, "title": "PC游戏充值明细查询条件", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-query\"]"], "fingerprint": "input|data-annotation-id=pc-recharge-detail-query", "path": [] },
+        "aiPrompt": "说明PC游戏充值明细查询条件和即时刷新规则。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-date", "index": 2, "title": "交易时间范围", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-date\"]"], "fingerprint": "div|data-annotation-id=pc-recharge-detail-date", "path": [] },
+        "aiPrompt": "说明PC游戏充值明细默认日期和日期选择规则。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-export", "index": 3, "title": "导出", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-export\"]"], "fingerprint": "button|data-annotation-id=pc-recharge-detail-export", "path": [] },
+        "aiPrompt": "说明PC游戏充值明细导出范围、文件名和反馈。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-table", "index": 4, "title": "PC游戏充值订单列表", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-table\"]"], "fingerprint": "div|data-annotation-id=pc-recharge-detail-table", "path": [] },
+        "aiPrompt": "说明PC游戏充值订单列表字段、排序、格式和空值。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-total", "index": 5, "title": "查询总计", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-total\"]"], "fingerprint": "tr|data-annotation-id=pc-recharge-detail-total", "path": [] },
+        "aiPrompt": "说明PC游戏充值金额总计的状态范围和计算方式。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-status", "index": 6, "title": "订单状态", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-status\"]"], "fingerprint": "th|data-annotation-id=pc-recharge-detail-status", "path": [] },
+        "aiPrompt": "说明PC游戏充值订单状态及标签颜色。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-channel", "index": 7, "title": "支付渠道筛选", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-channel\"]"], "fingerprint": "button|data-annotation-id=pc-recharge-detail-channel", "path": [] },
+        "aiPrompt": "说明PC游戏支付渠道筛选选项和联动。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-subsidy", "index": 8, "title": "平台补贴金额", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-subsidy\"]"], "fingerprint": "th|data-annotation-id=pc-recharge-detail-subsidy", "path": [] },
+        "aiPrompt": "说明PC游戏平台补贴金额的空值和不可下钻规则。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-order-entry", "index": 9, "title": "订单详情入口", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-order-entry\"]"], "fingerprint": "th|data-annotation-id=pc-recharge-detail-order-entry", "path": [] },
+        "aiPrompt": "说明点击订单号打开订单详情。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "pc-recharge-detail-order-modal", "index": 10, "title": "订单详情弹窗", "pageId": "pc-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"pc-recharge-detail-order-modal\"]"], "fingerprint": "section|data-annotation-id=pc-recharge-detail-order-modal", "path": [] },
+        "aiPrompt": "说明PC游戏订单详情弹窗字段、格式和关闭行为。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-query", "index": 1, "title": "快爆小游戏充值明细查询条件", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-query\"]"], "fingerprint": "input|data-annotation-id=mini-game-recharge-detail-query", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值明细查询条件和即时刷新。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-date", "index": 2, "title": "交易时间范围", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-date\"]"], "fingerprint": "div|data-annotation-id=mini-game-recharge-detail-date", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值明细默认日期和选择规则。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-export", "index": 3, "title": "导出", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-export\"]"], "fingerprint": "button|data-annotation-id=mini-game-recharge-detail-export", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值明细导出范围、文件名和反馈。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-table", "index": 4, "title": "快爆小游戏充值订单列表", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-table\"]"], "fingerprint": "div|data-annotation-id=mini-game-recharge-detail-table", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值列表字段、玩家名称、排序和空值。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-total", "index": 5, "title": "查询总计", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-total\"]"], "fingerprint": "tr|data-annotation-id=mini-game-recharge-detail-total", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值金额总计的状态范围和计算方式。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-status", "index": 6, "title": "订单状态", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-status\"]"], "fingerprint": "th|data-annotation-id=mini-game-recharge-detail-status", "path": [] },
+        "aiPrompt": "说明快爆小游戏充值订单状态及标签颜色。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-channel", "index": 7, "title": "支付渠道筛选", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-channel\"]"], "fingerprint": "button|data-annotation-id=mini-game-recharge-detail-channel", "path": [] },
+        "aiPrompt": "说明快爆小游戏支付渠道筛选选项和联动。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-subsidy", "index": 8, "title": "平台补贴金额", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-subsidy\"]"], "fingerprint": "th|data-annotation-id=mini-game-recharge-detail-subsidy", "path": [] },
+        "aiPrompt": "说明快爆小游戏平台补贴金额的空值和不可下钻规则。", "annotationText": "", "hasMarkdown": true, "color": "#2E8B57", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-order-entry", "index": 9, "title": "订单详情入口", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-order-entry\"]"], "fingerprint": "th|data-annotation-id=mini-game-recharge-detail-order-entry", "path": [] },
+        "aiPrompt": "说明点击快爆小游戏订单号打开订单详情。", "annotationText": "", "hasMarkdown": true, "color": "#4165D7", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      },
+      {
+        "id": "mini-game-recharge-detail-order-modal", "index": 10, "title": "订单详情弹窗", "pageId": "mini-game-recharge-detail",
+        "locator": { "selectors": ["[data-annotation-id=\"mini-game-recharge-detail-order-modal\"]"], "fingerprint": "section|data-annotation-id=mini-game-recharge-detail-order-modal", "path": [] },
+        "aiPrompt": "说明快爆小游戏订单详情弹窗字段、格式和关闭行为。", "annotationText": "", "hasMarkdown": true, "color": "#D97706", "images": [], "createdAt": 1786610400000, "updatedAt": 1786610400000
+      }
+    ]
+  },
+  "markdownMap": {
+    "mobile-recharge-formal-order-type": "# 正式订单数据域\n\n## 做什么\n展示好游快爆手游充值业务中的正式订单，供业务核对真实交易、结算金额和支付结果。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 选择“正式订单” | 只查询正式订单数据，不混入测试订单 |\n| 切换为“测试订单” | 页面结构保持一致，查询数据域切换为测试订单 |\n| 正式订单查询无结果 | 表格显示“暂无数据”，不显示查询总计，导出不可点击 |",
+    "mobile-recharge-test-order-type": "# 测试订单数据域\n\n## 做什么\n独立查询测试账号、内部开发或测试过程产生的充值订单，用于验证支付链路和游戏接入。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 选择“测试订单” | 只显示测试订单，字段和交互与正式订单一致 |\n| 切换为“正式订单” | 页面结构保持一致，数据域切换为正式订单 |\n| 平台补贴明确为 0 | 显示 `0.00` 和下划线，仍允许打开下钻弹窗 |\n| 查询无结果 | 表格显示“暂无数据”，不显示查询总计，导出不可点击 |\n\n## 保存后的影响\n测试订单独立查询、独立汇总，不进入正式订单查询总计。",
+    "mobile-recharge-detail-query": "# 充值明细查询条件\n\n## 做什么\n按订单交易时间和订单、游戏、玩家及开发者信息缩小订单范围。正式订单与测试订单使用相同查询条件。\n\n## 字段\n\n| 字段 | 默认值 | 匹配规则 |\n| --- | --- | --- |\n| 时间范围 | 当月 1 日至当天 | 起止日期均包含 |\n| 订单号 | 空 | 匹配快爆平台订单号 |\n| 游戏ID / 名称 | 空 | 同一输入框匹配游戏 ID 或名称 |\n| 玩家ID / 名称 | 空 | 同一输入框保留 ID 或名称匹配能力；快爆当前玩家名称数据为空 |\n| 开发者ID / 名称 | 空 | 同一输入框匹配开发者 ID 或名称 |\n\n页面不提供游戏订单号、充值金额、优惠券面额和优惠券ID查询；这些数据仍可按当前列表或下钻规则展示。\n\n## 点击或保存校验\n不同查询条件之间使用“且”关系；所有非空条件必须同时满足。同一个“ID / 名称”输入框内部使用“或”关系，ID 或名称任一匹配即可。输入、清空或切换任一条件后立即刷新列表与查询总计，并返回第 1 页，不需要点击查询或重置按钮。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 条件为空 | 该条件不限制结果 |\n| 条件组合无匹配 | 显示“暂无数据”，不显示查询总计 |\n| 玩家没有名称 | 列表名称位置显示 `-`，仍可用玩家 ID 查询 |",
+    "mobile-recharge-detail-date": "# 交易时间范围\n\n## 做什么\n按订单交易发生日期限定明细范围。\n\n## 显示条件\n默认显示当月 1 日至查询当天；未来日期置灰且不可点击。\n\n## 点击或保存校验\n第一次选择日期后，该日期暂时同时作为开始和结束日期；第二次选择后按日期先后自动确定起止值并关闭窗口。点击窗口外区域关闭日期窗口。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 选择同一天 | 开始和结束显示同一日期 |\n| 先选较晚日期、后选较早日期 | 自动交换为较早日期至较晚日期 |\n| 日期在今天之后 | 置灰，不可选择 |\n| 相邻月份补位日期 | 不重复显示选中态或范围背景 |",
+    "mobile-recharge-detail-export": "# 导出\n\n## 做什么\n按当前全部筛选条件创建订单列表导出任务，导出字段与当前列表字段一致，不按当前分页截断。\n\n## 文件名\n文件名规则为：`{一级菜单}{三级子表}-{开始日期}至{结束日期}`。日期使用 `YYYY-MM-DD` 格式，文件名不添加空格。\n\n正式订单示例：`手游正式订单-2026-08-01至2026-08-13`。\n\n测试订单示例：`手游测试订单-2026-08-01至2026-08-13`。\n\n开始日期和结束日期取当前页面筛选日期；筛选日期变化后，导出文件名同步变化。\n\n## 显示条件\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 当前筛选结果有数据 | 按钮可点击，可重复创建导出任务 |\n| 当前筛选结果为 0 条 | 按钮置灰且不可点击 |\n\n## 保存后的影响\n点击后不改变查询条件、页码和列表，显示绿色提示：`表格正在导出，导出成功后可在下载列表查看`。原型不生成真实文件，本期不新增下载列表入口。",
+    "mobile-recharge-detail-table": "# 充值订单列表\n\n## 做什么\n逐笔展示当前筛选结果中的充值订单，支持核对订单、对象、支付状态和金额。列表默认按交易时间倒序排列，最新订单显示在最上方。\n\n## 字段\n\n| 字段 | 数据来源与格式 |\n| --- | --- |\n| 时间 | 订单交易时间，格式 `YYYY-MM-DD HH:mm:ss` |\n| 订单号 | 快爆平台侧订单号；以下划线显示并支持下钻 |\n| 游戏ID / 名称 | 游戏标识与当前展示名称，使用 `ID / 名称` |\n| 玩家ID / 名称 | 玩家标识；快爆当前没有玩家名称时显示 `ID / -` |\n| 订单状态 | 当前查询到的成功、失败或异常状态 |\n| 支付渠道 | 订单实际支付渠道，并支持列表内筛选 |\n| 充值金额 | 玩家实际支付金额，保留两位小数，不显示货币符号 |\n| 平台补贴金额 | 平台承担并参与结算的补贴，保留两位小数；满足入口条件时支持下钻 |\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 普通数据行 | 默认白色，鼠标移入时显示浅灰背景 |\n| 字段没有信息 | 显示 `-`，不显示下划线 |\n| 明确金额为 0 且业务要求可追溯 | 显示 `0.00`；测试订单平台补贴仍支持下钻 |\n| 查询无结果 | 表体显示“暂无数据” |\n\n## 数据来源\n列表展示符合当前全部筛选条件的订单记录。",
+    "mobile-recharge-detail-total": "# 查询总计\n\n## 做什么\n汇总当前全部筛选结果中的充值金额和平台补贴金额，供业务核对查询范围整体金额。\n\n## 计算规则\n`充值金额总计 = 当前全部筛选结果中各订单充值金额之和`。\n\n`平台补贴金额总计 = 当前全部筛选结果中各订单平台补贴金额之和`。\n\n金额按全部结果汇总后保留两位小数，不按当前分页求和。查询总计不展示订单号或订单数量，不参与分页。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 有查询结果 | 固定显示为表体第一行，背景为白色 |\n| 无查询结果 | 不显示查询总计行 |\n| 正式订单 | 汇总当前筛选结果中的成功、失败和异常订单金额 |\n| 测试订单 | 只汇总测试订单，不与正式订单合并 |",
+    "mobile-recharge-detail-status": "# 订单状态\n\n## 做什么\n标识订单当前支付处理结果，帮助区分成功、失败和异常订单。\n\n## 不同情况怎么展示\n\n| 状态 | 页面表现 |\n| --- | --- |\n| 成功 | 绿色状态标签 |\n| 失败 | 红色状态标签 |\n| 异常 | 橙色状态标签 |\n\n## 数据来源\n页面展示当前订单记录中的订单状态。",
+    "mobile-recharge-detail-channel-filter": "# 支付渠道筛选\n\n## 做什么\n在列表列头按支付渠道进一步筛选当前订单结果。\n\n## 字段\n可选项为：全部、QQ钱包APP、微信H5、银联微信小程序、银联支付宝H5、支付宝APP、微信APP、微信PC扫码、支付宝PC扫码、零元购。\n\n## 点击或保存校验\n选择渠道后立即刷新列表、查询总计和分页，并回到第 1 页；该条件与顶部其他查询条件使用“且”关系。选择“全部”仅清空支付渠道条件，不清空其他条件。\n\n## 不同情况怎么展示\n当前渠道条件生效时筛选图标保持已筛选状态；点击页面其他区域不改变已选渠道。",
+    "mobile-recharge-detail-order-entry": "# 订单详情入口\n\n## 做什么\n通过数据行订单号查看该笔订单的游戏侧信息和服务端回传内容。\n\n## 如何打开弹窗\n点击列表“订单号”列中任一带下划线的订单号，打开该行的订单详情弹窗。弹窗打开后，弹窗区域显示对应的橙色批注标记。\n\n## 显示条件\n仅数据行订单号显示下划线并可点击；查询总计行不显示订单号入口。每次点击只打开当前行对应的订单详情，不改变筛选条件和分页。",
+    "mobile-recharge-detail-order-modal": "# 订单详情弹窗\n\n## 如何打开\n点击列表“订单号”列中任一带下划线的订单号打开。\n\n## 做什么\n展示当前所选订单的游戏标识、双侧订单号、游戏币、区服和服务端回传内容。\n\n## 字段\n\n| 字段 | 数据来源 |\n| --- | --- |\n| 游戏ID / 名称 | 当前订单关联的游戏 |\n| 订单号 | 快爆平台侧订单号 |\n| 游戏订单号 | 游戏侧订单号，仅在对应游戏内识别 |\n| 游戏币 | 当前订单对应的游戏币或游戏内商品描述 |\n| 游戏区服ID | 游戏侧区服标识 |\n| 服务端回传值 | 当前订单记录中的游戏服务端回传内容 |\n\n## 不同情况怎么展示\n服务端回传值能够解析为 JSON 时按 JSON 分行展示；不能解析为 JSON 时按原内容展示。\n\n## 关闭行为\n点击右上角 `×` 或弹窗外遮罩关闭；关闭后保留原查询条件、列表页码和滚动位置。弹窗没有标题文字和底部关闭按钮。",
+    "mobile-recharge-detail-total-subsidy-entry": "# 总计平台补贴入口\n\n## 做什么\n从查询总计行查看当前全部筛选结果的优惠券面额和平台补贴汇总。\n\n## 如何打开弹窗\n点击“查询总计”行中带下划线的平台补贴金额，打开总计平台补贴弹窗。弹窗打开后，弹窗区域显示对应的橙色批注标记。\n\n## 显示条件\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 查询结果有数据且存在平台补贴 | 平台补贴金额保留两位小数，显示下划线并可点击 |\n| 查询结果有数据但没有平台补贴 | 显示 `-`，不显示下划线且不可点击 |\n| 查询无结果 | 不显示查询总计行 |",
+    "mobile-recharge-detail-total-subsidy-modal": "# 总计平台补贴弹窗\n\n## 如何打开\n点击“查询总计”行中带下划线的平台补贴金额打开。\n\n## 做什么\n说明当前全部筛选结果中的优惠券面额和平台补贴金额汇总，不代表某一笔订单。\n\n## 计算规则\n`优惠券面额 = 当前全部筛选结果中各订单优惠券面额之和`。\n\n`平台补贴金额 = 当前全部筛选结果中各订单平台补贴金额之和`。\n\n两项金额均先按全部筛选结果汇总，再保留两位小数；不按当前分页求和。\n\n## 关闭行为\n点击右上角 `×` 或弹窗外遮罩关闭；关闭后不改变查询条件和分页。",
+    "mobile-recharge-detail-row-subsidy-entry": "# 订单平台补贴入口\n\n## 做什么\n从数据行的平台补贴金额追溯该笔订单使用的优惠券和补贴信息。\n\n## 如何打开弹窗\n点击列表“平台补贴金额”列中任一带下划线的金额，打开该行的订单平台补贴弹窗。弹窗打开后，弹窗区域显示对应的橙色批注标记。\n\n## 不同情况怎么展示\n\n| 情况 | 页面表现 |\n| --- | --- |\n| 有平台补贴信息 | 金额保留两位小数，显示下划线并可点击 |\n| 测试订单明确为 0 | 显示 `0.00` 和下划线，仍可点击 |\n| 没有平台补贴信息 | 显示 `-`，不显示下划线，不可点击 |\n\n入口只对应当前数据行，不改变其他订单，也不代表查询总计。",
+    "mobile-recharge-detail-row-subsidy-modal": "# 订单平台补贴弹窗\n\n## 如何打开\n点击列表“平台补贴金额”列中任一带下划线的金额打开。\n\n## 做什么\n展示当前所选订单的平台游戏、订单号、优惠券和平台补贴信息。\n\n## 字段\n\n| 字段 | 数据来源与格式 |\n| --- | --- |\n| 平台游戏 | 当前订单关联的游戏 ID 和名称 |\n| 订单号 | 当前快爆平台订单号 |\n| 优惠券面额 | 当前订单优惠券券面金额，保留两位小数 |\n| 平台补贴金额 | 当前订单由平台承担并参与结算的补贴，保留两位小数 |\n| 优惠券ID | 当前订单关联的优惠券标识；没有信息时显示 `-` |\n\n## 计算规则\n弹窗展示单笔订单保存的金额，不使用列表其他订单计算，也不使用查询总计金额替代。\n\n## 关闭行为\n点击右上角 `×` 或弹窗外遮罩关闭；关闭后保留查询条件和分页。",
+    "mobile-recharge-stats-view": "# 充值统计子表切换\n\n## 做什么\n在同一充值统计页面骨架中切换统计对象，不改变手游正式充值订单的业务范围。\n\n## 不同情况怎么展示\n\n| 子表 | 每行统计对象 | 对象字段 | 专属指标 |\n| --- | --- | --- | --- |\n| 游戏统计 | 时间粒度＋游戏 | 游戏ID / 名称、开发者ID / 名称 | 券使用数、券面额 |\n| 开发者统计 | 时间粒度＋开发者 | 开发者ID / 名称、公司 / 个人名称 | 不显示券使用数和券面额 |\n| 汇总统计 | 时间粒度下的整体数据 | 不显示游戏和开发者字段 | 不显示券使用数和券面额 |\n\n切换子表后保留统计页的时间范围、时间粒度和周期明细／区间汇总选择；列表、查询总计和图表按新统计对象重新计算。",
+    "mobile-recharge-stats-chart-entry": "# 统计图入口\n\n## 做什么\n将当前全部筛选结果按所选展示方式绘制为统计图。\n\n## 点击结果\n\n| 当前筛选结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 打开右侧统计图抽屉 |\n| 无数据 | 不打开抽屉，显示红色提示 `暂无图表数据` |\n\n图表使用当前全部筛选结果，不按当前分页截断。",
+    "mobile-recharge-stats-range-mode": "# 周期明细与区间汇总\n\n## 做什么\n控制列表和图表是按时间粒度拆分，还是合并整个查询区间。默认选择“周期明细”。\n\n## 不同情况怎么展示\n\n| 选项 | 列表聚合 | 图表 |\n| --- | --- | --- |\n| 周期明细 | 按当前选择的日、月或年拆分 | 时间趋势折线图 |\n| 区间汇总 | 游戏统计按游戏合并；开发者统计按开发者合并；汇总统计合并为一条 | 分层柱状图 |\n\n区间汇总的“时间”列显示当前实际查询区间；起止值相同时只显示一个值。切换后立即刷新列表、查询总计和分页，并返回第1页。",
+    "mobile-recharge-stats-precision": "# 统计时间粒度\n\n## 做什么\n选择统计数据按日、按月或按年展示。默认选择“按日”。\n\n## 不同情况怎么展示\n\n| 选项 | 时间列格式 | 日期选择器 |\n| --- | --- | --- |\n| 按日 | `YYYY-MM-DD` | 双月日历，并提供昨天、过去7天、过去30天、过去90天 |\n| 按月 | `YYYY-MM` | 月份选择面板 |\n| 按年 | `YYYY` | 年份选择面板 |\n\n切换粒度后，列表、查询总计和图表按新粒度重新聚合，并返回第1页。",
+    "mobile-recharge-stats-date": "# 统计时间范围\n\n## 做什么\n限定参与充值统计的订单交易日期。起止日期均包含在查询范围内。\n\n## 默认值\n结束日为查询当天；开始日为上个月同日的下一天。上个月没有对应日期时，先取上个月最后一天，再取其下一天。\n\n## 最大时间宽度\n\n| 时间精度 | 最大范围 | 边界规则 |\n| --- | --- | --- |\n| 按日 | 1个自然年 | 起止日期均包含，最晚终点为起点次年同日前一天 |\n| 按月 | 12个连续自然月 | 起止月份均包含，最晚终点为起点月份后的第11个月 |\n| 按年 | 5个连续自然年 | 起止年份均包含，最晚终点为起点年份后的第4年 |\n\n## 点击或保存校验\n未来日期置灰且不可选择。第一次选择日期、月份或年份后，以该值作为一端，超出对应最大时间宽度的另一端选项立即置灰且不可选择；允许向前或向后选择另一端。第二次选择后自动按先后顺序确定起止范围并关闭窗口。点击窗口外区域关闭窗口。按日模式的快速日期选择点击后立即应用并关闭窗口。",
+    "mobile-recharge-stats-query": "# 统计对象查询条件\n\n## 字段\n\n| 子表 | 查询字段 |\n| --- | --- |\n| 游戏统计 | 游戏ID / 名称、开发者ID / 名称、公司 / 个人名称 |\n| 开发者统计 | 开发者ID / 名称、公司 / 个人名称 |\n| 汇总统计 | 游戏ID / 名称、开发者ID / 名称、公司 / 个人名称 |\n\n## 点击或保存校验\n不同查询条件之间使用“且”关系；所有非空条件必须同时满足。同一个“ID / 名称”输入框内部使用“或”关系，ID或名称任一匹配即可。输入或清空任一条件后立即刷新列表与查询总计，并返回第1页。条件组合无匹配时表格显示 `暂无数据`，不显示查询总计。",
+    "mobile-recharge-stats-export": "# 导出\n\n## 做什么\n按当前全部筛选条件导出当前子表的全部统计结果，导出字段与当前列表一致，不按当前分页截断。\n\n## 文件名\n文件名规则为：`{一级菜单}{三级子表}-{开始日期}至{结束日期}`，日期使用 `YYYY-MM-DD`。例如：`手游游戏统计-2026-08-01至2026-08-13`。\n\n## 显示条件\n有统计结果时按钮可点击并可重复创建任务；无数据时按钮置灰且不可点击。点击后不改变条件和页码，显示绿色提示：`表格正在导出，导出成功后可在下载列表查看`。",
+    "mobile-recharge-stats-table": "# 充值统计列表\n\n## 做什么\n展示当前筛选条件、统计对象、时间粒度和展示方式共同确定的聚合结果。\n\n## 字段\n\n| 子表 | 列表字段 |\n| --- | --- |\n| 游戏统计 | 时间、游戏ID / 名称、开发者ID / 名称、待结算金额、成功金额、失败金额、平台补贴金额、平台补贴占比、券使用数、券面额、订单次数、订单人数 |\n| 开发者统计 | 时间、开发者ID / 名称、公司 / 个人名称、待结算金额、成功金额、失败金额、平台补贴金额、平台补贴占比、订单次数、订单人数 |\n| 汇总统计 | 时间、待结算金额、成功金额、失败金额、平台补贴金额、平台补贴占比、订单次数、订单人数 |\n\n## 不同情况怎么展示\n周期明细默认按时间倒序，最新日期、月份或年份优先；同一时间下保持统计对象稳定顺序。区间汇总的各行显示相同实际查询区间。金额和比例保留两位小数，不显示货币符号；字段无数据时显示 `-`，明确为0时显示对应的0值。无结果时表体显示 `暂无数据`。",
+    "mobile-recharge-stats-total": "# 查询总计\n\n## 做什么\n对当前全部筛选结果重新汇总，不按当前分页求和。\n\n## 计算规则\n金额、券使用数、券面额和订单次数按全部结果汇总；平台补贴占比使用汇总后的平台补贴金额除以汇总后的待结算金额重新计算。订单人数在全部筛选范围内按“玩家ID＋游戏ID”重新去重，不直接相加各行人数。金额和比例在汇总完成后保留两位小数；待结算金额为0时，平台补贴占比显示 `0.00%`。\n\n## 不同情况怎么展示\n有数据时固定显示为表体第一行，背景为白色，不参与排序和分页；无数据时不显示查询总计行。",
+    "mobile-recharge-stats-amount-metrics": "# 金额与补贴指标\n\n## 计算规则\n\n| 指标 | 计算口径 |\n| --- | --- |\n| 成功金额 | 状态为成功的正式充值订单金额之和 |\n| 失败金额 | 状态为失败的正式充值订单金额之和；异常订单金额不并入 |\n| 平台补贴金额 | 当前聚合范围内的平台补贴金额之和 |\n| 待结算金额 | 成功金额＋平台补贴金额 |\n| 平台补贴占比 | 平台补贴金额÷待结算金额 |\n| 券使用数 | 当前聚合范围内优惠券金额大于0的订单数；一笔订单最多计1次 |\n| 券面额 | 当前聚合范围内优惠券金额之和 |\n\n优惠券金额等于0的订单不计入券使用数。金额和比例先按当前聚合范围汇总，再四舍五入保留两位小数；待结算金额为0时平台补贴占比显示 `0.00%`。",
+    "mobile-recharge-stats-order-metrics": "# 订单次数与订单人数\n\n## 计算规则\n`订单次数 = 当前聚合范围内状态为成功的正式充值订单数量`。失败订单和异常订单不计入订单次数。\n\n`订单人数 = 当前聚合范围内成功订单中不同“玩家ID＋游戏ID”组合的数量`。同一玩家在同一游戏重复成功充值只计1人；同一玩家在不同游戏充值，按不同组合分别计数。\n\n周期明细按每个日、月或年分别计算；区间汇总按完整查询区间重新计算。查询总计在全部筛选范围内重新去重，不把各行订单人数直接相加。两个字段只展示数值，不提供下钻弹窗。",
+    "mobile-recharge-stats-chart-drawer": "# 统计图抽屉\n\n## 如何打开\n点击查询栏中的折线图图标打开。抽屉宽度为1030px；可用视口不足时最大宽度为90vw。点击右上角 `×` 或抽屉外遮罩关闭，关闭后保留筛选条件和分页。\n\n## 周期明细\n展示时间趋势折线。右上角可切换待结算金额、成功金额、失败金额、订单次数和订单人数。单个统计对象显示一条折线；多个对象按当前指标在完整查询区间内的汇总值降序选择Top15，默认显示Top5，其余对象通过图例选择显示。查询区间内缺少数据的时间点按0显示。鼠标移入时间点时显示垂直虚线和浮层，浮层列出该时间点当前选中对象的指标值。\n\n## 区间汇总\n展示分层柱状图。右上角可切换“收入”和“订单数”：收入维度包含待结算金额、成功金额、失败金额，并按待结算金额降序选择Top15；订单数维度包含订单次数、订单人数，并按订单次数降序选择Top15。游戏统计按游戏、开发者统计按开发者展示Top15；汇总统计显示整体单柱。点击图例可隐藏或恢复对应指标层，悬浮柱体时一次显示当前可见的全部指标值。",
+    "mobile-paid-download-detail-query": "# 付费下载明细查询条件\n\n## 做什么\n\n按购买时间、订单、游戏、玩家、开发者和购买金额缩小付费下载订单范围。上游只向本页面提供成功订单，因此页面不显示订单状态，也不提供状态筛选。\n\n## 查询字段\n\n| 字段 | 默认值 | 匹配规则 |\n| --- | --- | --- |\n| 时间范围 | 当月1日至当天 | 起止日期均包含 |\n| 订单号 | 空 | 匹配快爆平台订单号 |\n| 游戏ID / 名称 | 空 | 游戏ID或名称任一匹配 |\n| 玩家ID / 名称 | 空 | 玩家ID或名称任一匹配；名称位置显示 `-` |\n| 开发者ID / 名称 | 空 | 开发者ID或名称任一匹配 |\n| 购买金额 | 空 | 精确匹配，最多两位小数 |\n\n不提供游戏订单号、优惠券面额和优惠券ID查询。\n\n## 联动规则\n\n- 不同查询条件之间使用“且”。\n- 同一“ID / 名称”输入框内部使用“或”。\n- 输入、清空或切换条件后立即刷新列表和查询总计，并返回第1页。\n- 无匹配结果时显示 `暂无数据`，不显示查询总计，导出不可点击。",
+    "mobile-paid-download-detail-date": "# 购买时间范围\n\n## 默认值与范围\n\n- 默认范围：当月1日至查询当天。\n- 起止日期均包含。\n- 未来日期置灰且不可选择。\n\n## 选择行为\n\n| 操作 | 页面表现 |\n| --- | --- |\n| 第一次选择 | 等待选择另一端日期 |\n| 第二次选择 | 自动按时间先后确定起止范围并关闭窗口 |\n| 点击窗口外 | 关闭窗口 |",
+    "mobile-paid-download-detail-export": "# 导出\n\n## 导出范围\n\n按当前全部筛选条件导出全部付费下载明细，字段与列表一致，不按当前分页截断。\n\n## 文件名\n\n- 规则：`手游付费下载明细-{开始日期}至{结束日期}`\n- 日期格式：`YYYY-MM-DD`\n- 示例：`手游付费下载明细-2026-08-01至2026-08-13`\n\n## 点击结果\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 可重复创建任务，显示绿色提示 `表格正在导出，导出成功后可在下载列表查看` |\n| 无数据 | 按钮置灰，不可点击 |",
+    "mobile-paid-download-detail-table": "# 付费下载明细列表\n\n## 数据来源\n展示上游传入的成功付费下载订单，页面不存在失败或异常状态数据。\n\n## 字段\n\n| 字段 | 展示规则 |\n| --- | --- |\n| 时间 | 订单购买时间，格式 `YYYY-MM-DD HH:mm:ss` |\n| 订单号 | 快爆平台订单号 |\n| 游戏ID / 名称 | 使用 `ID / 名称` 组合展示 |\n| 玩家ID / 名称 | 当前手游没有玩家名称数据，使用 `玩家ID / -` 展示 |\n| 支付渠道 | 订单实际支付渠道，并支持列内筛选 |\n| 购买金额 | 玩家实际支付金额，保留两位小数，不显示货币符号 |\n| 平台补贴金额 | 订单平台补贴金额，保留两位小数；没有补贴时显示 `-` 且不可点击 |\n\n列表按购买时间倒序排列，最新订单优先。数据行仅在鼠标移入时显示背景色。",
+    "mobile-paid-download-detail-total": "# 查询总计\n\n## 汇总范围\n\n基于当前全部筛选结果汇总，不按当前分页求和。\n\n## 计算规则\n\n| 指标 | 规则 |\n| --- | --- |\n| 购买金额 | 各订单购买金额之和 |\n| 平台补贴金额 | 各订单平台补贴金额之和 |\n\n金额汇总后四舍五入保留两位小数，不显示货币符号。\n\n## 显示条件\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 固定为表格第一行，背景为白色，不参与分页 |\n| 无数据 | 不显示查询总计行 |",
+    "mobile-paid-download-detail-channel": "# 支付渠道筛选\n\n## 可选项\n\n- 全部\n- QQ钱包APP\n- 银联微信小程序\n- 银联支付宝小程序\n- 支付宝APP\n- 微信APP\n- 微信扫码\n- 支付宝扫码\n\n## 筛选联动\n\n选择后立即刷新列表和查询总计，并返回第1页。该条件与顶部其他查询条件使用“且”；选择“全部”时不限制支付渠道。",
+    "mobile-paid-download-detail-total-subsidy-entry": "# 总计平台补贴入口\n\n| 总计补贴金额 | 页面表现 |\n| --- | --- |\n| 大于0 | 显示带下划线的金额；点击后打开总计平台补贴弹窗 |\n| 等于0 | 显示 `-`，不显示下划线且不可点击 |",
+    "mobile-paid-download-detail-total-subsidy-modal": "# 总计平台补贴弹窗\n\n## 数据范围\n\n使用当前全部筛选结果，不按当前分页计算。\n\n## 字段\n\n| 字段 | 计算规则 |\n| --- | --- |\n| 优惠券面额 | 各订单优惠券面额之和 |\n| 平台补贴金额 | 各订单平台补贴金额之和 |\n\n金额汇总后保留两位小数，不显示货币符号。\n\n## 窗口与关闭\n\n弹窗不显示标题和底部按钮。点击右上角 `×` 或遮罩关闭；关闭后保留筛选条件和分页。",
+    "mobile-paid-download-detail-row-subsidy-entry": "# 订单平台补贴入口\n\n| 订单补贴信息 | 页面表现 |\n| --- | --- |\n| 平台补贴金额大于0 | 显示带下划线的金额；点击后打开该订单的平台补贴弹窗 |\n| 没有平台补贴 | 显示 `-`，不显示下划线且不可点击 |",
+    "mobile-paid-download-detail-row-subsidy-modal": "# 订单平台补贴弹窗\n\n## 字段\n\n| 字段 | 展示内容 |\n| --- | --- |\n| 平台游戏 | 游戏ID / 名称 |\n| 订单号 | 当前快爆平台订单号 |\n| 优惠券面额 | 当前订单优惠券金额 |\n| 平台补贴金额 | 当前订单平台补贴金额 |\n| 优惠券ID | 当前订单优惠券标识 |\n\n## 优惠券规则\n\n一笔付费下载订单最多使用一张优惠券，因此弹窗只展示一组优惠券信息。优惠券金额大于0时计入券使用数；等于0时不计入。\n\n金额保留两位小数，不显示货币符号。\n\n## 窗口与关闭\n\n弹窗不显示标题和底部按钮。点击右上角 `×` 或遮罩关闭；关闭后保留筛选条件和分页。",
+    "mobile-paid-download-stats-view": "# 付费下载统计子表\n\n## 共用口径\n\n三个子表均只统计上游传入的成功付费下载数据，不显示订单状态和失败金额。\n\n## 子表差异\n\n| 子表 | 统计对象 | 对象与专属字段 |\n| --- | --- | --- |\n| 游戏统计 | 游戏 | 游戏、开发者、公司 / 个人、券使用数、券面额 |\n| 开发者统计 | 开发者 | 开发者、公司 / 个人 |\n| 汇总统计 | 全部筛选结果 | 不显示游戏或开发者对象列 |\n\n## 切换结果\n\n切换后使用目标子表的字段重新查询，并返回第1页。",
+    "mobile-paid-download-stats-chart-entry": "# 统计图入口\n\n## 做什么\n\n按当前子表、展示方式、时间粒度和全部筛选条件生成图表。\n\n## 点击结果\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 打开右侧统计图抽屉 |\n| 无数据 | 不打开抽屉，显示红色提示 `暂无图表数据` |",
+    "mobile-paid-download-stats-range-mode": "# 周期明细与区间汇总\n\n| 选项 | 聚合方式 | 时间列 |\n| --- | --- | --- |\n| 周期明细 | 按所选日、月或年分别聚合 | 对应日期、月份或年份 |\n| 区间汇总 | 按统计对象汇总完整查询区间 | 实际查询区间 |\n\n切换后立即重新聚合列表、查询总计和图表，并返回第1页。",
+    "mobile-paid-download-stats-precision": "# 统计时间粒度\n\n## 可选项\n\n| 粒度 | 时间格式 |\n| --- | --- |\n| 按日 | `YYYY-MM-DD` |\n| 按月 | `YYYY-MM` |\n| 按年 | `YYYY` |\n\n默认按日。切换后按新粒度重新聚合列表、查询总计和图表，并返回第1页。",
+    "mobile-paid-download-stats-date": "# 统计时间范围\n\n## 默认范围\n\n- 结束日：查询当天。\n- 开始日：上个月同日的下一天。\n- 上个月没有对应日期时：取上个月最后一天的下一天。\n- 起止日期均包含，未来日期置灰且不可选择。\n\n## 不同粒度\n\n| 粒度 | 选择面板 |\n| --- | --- |\n| 按日 | 双月日历；提供昨天、过去7天、过去30天、过去90天 |\n| 按月 | 月份面板 |\n| 按年 | 年份面板 |\n\n第二次选择后自动按时间先后确定起止范围并关闭窗口；点击窗口外区域也会关闭窗口。",
+    "mobile-paid-download-stats-query": "# 统计对象查询\n\n## 匹配关系\n\n- 不同查询条件之间使用“且”。\n- 同一“ID / 名称”输入框内部使用“或”，ID或名称任一匹配即可。\n- 条件为空时，不限制对应字段。\n\n## 条件变化\n\n输入或清空任一条件后立即刷新列表和查询总计，并返回第1页。\n\n## 无结果\n\n显示 `暂无数据`，不显示查询总计，导出不可点击。",
+    "mobile-paid-download-stats-export": "# 导出\n\n## 导出范围\n\n按当前子表和全部筛选条件导出全部统计结果，不按当前分页截断。\n\n## 文件名\n\n- 规则：`{一级菜单}{三级子表}-{开始日期}至{结束日期}`\n- 日期格式：`YYYY-MM-DD`\n- 示例：`手游游戏统计-2026-08-01至2026-08-13`\n\n## 点击结果\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 可重复创建任务，显示绿色提示 `表格正在导出，导出成功后可在下载列表查看` |\n| 无数据 | 按钮置灰，不可点击 |",
+    "mobile-paid-download-stats-table": "# 付费下载统计列表\n\n## 数据范围\n\n只聚合上游传入的成功付费下载数据，不显示订单状态和失败金额。\n\n## 子表字段\n\n| 子表 | 显示字段 |\n| --- | --- |\n| 游戏统计 | 时间、游戏、开发者、公司 / 个人、待结算金额、成功金额、平台补贴金额、平台补贴占比、券使用数、券面额、订单次数、订单人数 |\n| 开发者统计 | 时间、开发者、公司 / 个人、待结算金额、成功金额、平台补贴金额、平台补贴占比、订单次数、订单人数 |\n| 汇总统计 | 时间、待结算金额、成功金额、平台补贴金额、平台补贴占比、订单次数、订单人数 |\n\n## 展示规则\n\n| 对象 | 页面表现 |\n| --- | --- |\n| 周期明细 | 按时间倒序，最新日期、月份或年份优先 |\n| 区间汇总 | 每行显示实际查询区间 |\n| 金额与比例 | 保留两位小数，不显示货币符号 |\n| 无数据字段 | 显示 `-` |\n| 明确为0 | 显示对应的0值 |",
+    "mobile-paid-download-stats-total": "# 查询总计\n\n## 汇总范围\n\n基于当前全部筛选结果重新汇总，不按当前分页求和。\n\n## 计算方式\n\n| 指标 | 总计规则 |\n| --- | --- |\n| 金额、券使用数、券面额、订单次数 | 汇总全部筛选结果 |\n| 平台补贴占比 | 汇总平台补贴金额 ÷ 汇总待结算金额 |\n| 订单人数 | 在完整筛选范围内按“玩家ID + 游戏ID”重新去重 |\n\n待结算金额为0时，平台补贴占比显示 `0.00%`。\n\n## 显示条件\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 固定为表格第一行，不参与分页 |\n| 无数据 | 不显示查询总计 |",
+    "mobile-paid-download-stats-amount-metrics": "# 金额与优惠券指标\n\n## 计算规则\n\n| 指标 | 规则 |\n| --- | --- |\n| 成功金额 | 成功付费下载订单的购买金额之和 |\n| 平台补贴金额 | 当前聚合范围内的平台补贴金额之和 |\n| 待结算金额 | 成功金额 + 平台补贴金额 |\n| 平台补贴占比 | 平台补贴金额 ÷ 待结算金额 |\n| 券使用数 | 优惠券金额大于0的订单数；一笔订单最多计1次 |\n| 券面额 | 当前聚合范围内的优惠券金额之和 |\n\n## 精度与零值\n\n- 金额和比例在汇总后四舍五入保留两位小数。\n- 待结算金额为0时，平台补贴占比显示 `0.00%`。",
+    "mobile-paid-download-stats-order-entry": "# 订单指标下钻入口\n\n## 指标口径\n\n| 指标 | 规则 |\n| --- | --- |\n| 订单次数 | 购买订单次数 + 获赠订单次数 |\n| 订单人数 | 按“玩家ID + 游戏ID”去重 |\n\n玩家购买一个游戏后即拥有该游戏，不会再获赠同一游戏，因此购买订单人数与获赠订单人数不存在相同组合。\n\n## 点击范围\n\n| 入口位置 | 弹窗数据范围 |\n| --- | --- |\n| 查询总计行 | 当前全部筛选结果 |\n| 数据行 | 当前行聚合范围 |\n\n订单次数和订单人数均以下划线显示并可点击。",
+    "mobile-paid-download-stats-order-count-modal": "# 订单次数弹窗\n\n## 字段与校验\n\n| 字段 | 数据规则 |\n| --- | --- |\n| 购买订单次数 | 上游实际拆分数据 |\n| 获赠订单次数 | 上游实际拆分数据 |\n\n两项之和等于入口对应的订单次数。\n\n## 数据范围\n\n- 从查询总计行打开：使用当前全部筛选结果。\n- 从数据行打开：使用当前行聚合范围。\n\n## 关闭行为\n\n点击右上角 `×` 或遮罩关闭；关闭后保留筛选条件和分页。",
+    "mobile-paid-download-stats-order-people-modal": "# 订单人数弹窗\n\n## 字段与校验\n\n| 字段 | 数据规则 |\n| --- | --- |\n| 购买订单人数 | 上游实际拆分数据，按“玩家ID + 游戏ID”去重 |\n| 获赠订单人数 | 上游实际拆分数据，按“玩家ID + 游戏ID”去重 |\n\n购买和获赠不存在相同组合，两项之和等于入口对应的订单人数。\n\n## 数据范围\n\n- 从查询总计行打开：在当前全部筛选范围内重新去重。\n- 从数据行打开：在当前行聚合范围内去重。\n\n## 关闭行为\n\n点击右上角 `×` 或遮罩关闭；关闭后保留筛选条件和分页。",
+    "mobile-paid-download-stats-chart-drawer": "# 统计图抽屉\n\n## 打开与关闭\n\n点击查询栏折线图图标打开。抽屉宽度为1030px，可用视口不足时最大宽度为90vw；点击右上角 `×` 或遮罩关闭。\n\n## 周期明细\n\n| 场景 | 图表表现 |\n| --- | --- |\n| 单对象 | 显示一条时间趋势折线 |\n| 多对象 | 按当前指标的区间汇总值降序取Top15，默认显示Top5，其余通过图例选择 |\n| 时间点无数据 | 按0显示 |\n\n可切换待结算金额、成功金额、订单次数和订单人数，不显示失败金额。\n\n## 区间汇总\n\n| 维度 | 指标 | Top15排序 |\n| --- | --- | --- |\n| 收入 | 待结算金额、成功金额 | 待结算金额降序 |\n| 订单数 | 订单次数、订单人数 | 订单次数降序 |\n\n游戏统计按游戏、开发者统计按开发者展示Top15；汇总统计显示整体单柱。",
+    "pc-recharge-detail-query": "# PC游戏充值明细查询条件\n\n## 查询字段\n\n| 字段 | 默认值 | 匹配规则 |\n| --- | --- | --- |\n| 时间范围 | 当月1日至当天 | 起止日期均包含 |\n| 订单号 | 空 | 匹配快爆平台订单号 |\n| 游戏ID / 名称 | 空 | 游戏ID或名称任一匹配 |\n| 玩家ID / 名称 | 空 | 保留玩家ID或名称匹配能力；当前按无名称展示 |\n| 开发者ID / 名称 | 空 | 开发者ID或名称任一匹配 |\n\n## 联动规则\n\n- 不同查询条件之间使用“且”。\n- 同一“ID / 名称”输入框内部使用“或”。\n- 输入或清空任一条件后立即刷新列表和查询总计，并返回第1页。\n- 无匹配结果时显示 `暂无数据`，不显示查询总计，导出不可点击。",
+    "pc-recharge-detail-date": "# 交易时间范围\n\n## 默认值与范围\n\n- 默认范围：当月1日至查询当天。\n- 起止日期均包含。\n- 未来日期置灰且不可选择。\n\n## 选择行为\n\n| 操作 | 页面表现 |\n| --- | --- |\n| 第一次选择 | 等待选择另一端日期 |\n| 第二次选择 | 自动按日期先后确定起止范围并关闭窗口 |\n| 点击窗口外 | 关闭日期窗口 |\n| 选择同一天 | 起止日期显示同一日期 |",
+    "pc-recharge-detail-export": "# 导出\n\n## 导出范围\n\n按当前全部筛选条件导出全部PC游戏充值明细，导出字段与当前列表一致，不按当前分页截断。\n\n## 文件名\n\n- 规则：`PC游戏充值明细-{开始日期}至{结束日期}`\n- 日期格式：`YYYY-MM-DD`\n- 示例：`PC游戏充值明细-2026-08-01至2026-08-14`\n\n## 点击结果\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 可重复创建导出任务，显示绿色提示 `表格正在导出，导出成功后可在下载列表查看` |\n| 无数据 | 按钮置灰，不可点击 |\n\n点击导出不改变查询条件、分页和列表。",
+    "pc-recharge-detail-table": "# PC游戏充值订单列表\n\n## 字段\n\n| 字段 | 展示规则 |\n| --- | --- |\n| 时间 | 订单交易时间，格式 `YYYY-MM-DD HH:mm:ss` |\n| 订单号 | 快爆平台订单号，以下划线显示并支持下钻 |\n| 游戏ID / 名称 | 使用 `ID / 名称` 组合展示 |\n| 玩家ID / 名称 | 当前按无玩家名称展示，统一显示 `玩家ID / -` |\n| 订单状态 | 展示成功、失败或异常 |\n| 支付渠道 | 展示订单实际支付渠道，并支持列内筛选 |\n| 充值金额 | 保留两位小数，不显示货币符号 |\n| 平台补贴金额 | 统一显示 `-` |\n\n列表按交易时间倒序排列，最新订单优先。普通数据行保持白色，仅在鼠标移入时显示浅灰背景；查询无结果时表体显示 `暂无数据`。",
+    "pc-recharge-detail-total": "# 查询总计\n\n## 汇总范围\n\n基于当前全部筛选结果汇总，不按当前分页求和。成功、失败和异常订单均计入充值金额总计。\n\n## 计算规则\n\n`充值金额总计 = 当前全部筛选结果中各订单充值金额之和`。\n\n金额汇总后四舍五入保留两位小数，不显示货币符号。平台补贴金额显示 `-`。\n\n## 显示条件\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 固定为表格第一行，背景为白色，不参与分页 |\n| 无数据 | 不显示查询总计行 |",
+    "pc-recharge-detail-status": "# 订单状态\n\n## 展示规则\n\n| 状态 | 页面表现 |\n| --- | --- |\n| 成功 | 绿色状态标签 |\n| 失败 | 红色状态标签 |\n| 异常 | 橙色状态标签 |\n\n状态取当前订单记录中的订单状态。三种状态的订单均可出现在列表中，并均计入当前查询总计的充值金额。",
+    "pc-recharge-detail-channel": "# 支付渠道筛选\n\n## 可选项\n\n- 全部\n- 微信PC扫码\n- 支付宝PC扫码\n\n## 筛选联动\n\n选择后立即刷新列表和查询总计，并返回第1页。支付渠道与顶部其他查询条件使用“且”；选择“全部”时仅清空支付渠道条件。",
+    "pc-recharge-detail-subsidy": "# 平台补贴金额\n\nPC游戏不提供平台补贴金额信息。查询总计行和所有数据行统一显示 `-`，不显示下划线，不可点击，也不提供平台补贴下钻弹窗。",
+    "pc-recharge-detail-order-entry": "# 订单详情入口\n\n## 如何打开\n\n点击列表“订单号”列中任一带下划线的订单号，打开当前数据行的订单详情弹窗。\n\n## 显示条件\n\n仅数据行订单号可点击；查询总计行不显示订单号。点击后不改变查询条件和分页，弹窗区域显示对应的橙色批注标记。",
+    "pc-recharge-detail-order-modal": "# 订单详情弹窗\n\n## 字段\n\n| 字段 | 展示内容 |\n| --- | --- |\n| 游戏ID / 名称 | 当前订单关联的游戏 |\n| 订单号 | 快爆平台订单号 |\n| 游戏订单号 | 游戏侧订单号 |\n| 游戏币 | 当前订单对应的游戏币或游戏内商品描述 |\n| 游戏区服ID | 游戏侧区服标识 |\n| 服务端回传值 | 当前订单记录中的游戏服务端回传内容 |\n\n服务端回传值能够解析为JSON时按JSON分行展示；不能解析时按原内容展示。弹窗不显示标题和底部关闭按钮；点击右上角 `×` 或遮罩关闭，关闭后保留查询条件和分页。",
+    "mini-game-recharge-detail-query": "# 快爆小游戏充值明细查询条件\n\n## 查询字段\n\n| 字段 | 默认值 | 匹配规则 |\n| --- | --- | --- |\n| 时间范围 | 当月1日至当天 | 起止日期均包含 |\n| 订单号 | 空 | 匹配快爆平台订单号 |\n| 游戏ID / 名称 | 空 | 游戏ID或名称任一匹配 |\n| 玩家ID / 名称 | 空 | 玩家ID或名称任一匹配 |\n| 开发者ID / 名称 | 空 | 开发者ID或名称任一匹配 |\n\n## 联动规则\n\n- 不同查询条件之间使用“且”。\n- 同一“ID / 名称”输入框内部使用“或”。\n- 输入或清空任一条件后立即刷新列表和查询总计，并返回第1页。\n- 无匹配结果时显示 `暂无数据`，不显示查询总计，导出不可点击。",
+    "mini-game-recharge-detail-date": "# 交易时间范围\n\n## 默认值与范围\n\n- 默认范围：当月1日至查询当天。\n- 起止日期均包含。\n- 未来日期置灰且不可选择。\n\n## 选择行为\n\n| 操作 | 页面表现 |\n| --- | --- |\n| 第一次选择 | 等待选择另一端日期 |\n| 第二次选择 | 自动按日期先后确定起止范围并关闭窗口 |\n| 点击窗口外 | 关闭日期窗口 |\n| 选择同一天 | 起止日期显示同一日期 |",
+    "mini-game-recharge-detail-export": "# 导出\n\n## 导出范围\n\n按当前全部筛选条件导出全部快爆小游戏充值明细，导出字段与当前列表一致，不按当前分页截断。\n\n## 文件名\n\n- 规则：`快爆小游戏充值明细-{开始日期}至{结束日期}`\n- 日期格式：`YYYY-MM-DD`\n- 示例：`快爆小游戏充值明细-2026-08-01至2026-08-14`\n\n## 点击结果\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 可重复创建导出任务，显示绿色提示 `表格正在导出，导出成功后可在下载列表查看` |\n| 无数据 | 按钮置灰，不可点击 |\n\n点击导出不改变查询条件、分页和列表。",
+    "mini-game-recharge-detail-table": "# 快爆小游戏充值订单列表\n\n## 字段\n\n| 字段 | 展示规则 |\n| --- | --- |\n| 时间 | 订单交易时间，格式 `YYYY-MM-DD HH:mm:ss` |\n| 订单号 | 快爆平台订单号，以下划线显示并支持下钻 |\n| 游戏ID / 名称 | 使用 `ID / 名称` 组合展示 |\n| 玩家ID / 名称 | 使用 `玩家ID / 玩家名称` 组合展示 |\n| 订单状态 | 展示成功、失败或异常 |\n| 支付渠道 | 展示订单实际支付渠道，并支持列内筛选 |\n| 充值金额 | 保留两位小数，不显示货币符号 |\n| 平台补贴金额 | 统一显示 `-` |\n\n列表按交易时间倒序排列，最新订单优先。普通数据行保持白色，仅在鼠标移入时显示浅灰背景；查询无结果时表体显示 `暂无数据`。",
+    "mini-game-recharge-detail-total": "# 查询总计\n\n## 汇总范围\n\n基于当前全部筛选结果汇总，不按当前分页求和。成功、失败和异常订单均计入充值金额总计。\n\n## 计算规则\n\n`充值金额总计 = 当前全部筛选结果中各订单充值金额之和`。\n\n金额汇总后四舍五入保留两位小数，不显示货币符号。平台补贴金额显示 `-`。\n\n## 显示条件\n\n| 当前结果 | 页面表现 |\n| --- | --- |\n| 有数据 | 固定为表格第一行，背景为白色，不参与分页 |\n| 无数据 | 不显示查询总计行 |",
+    "mini-game-recharge-detail-status": "# 订单状态\n\n## 展示规则\n\n| 状态 | 页面表现 |\n| --- | --- |\n| 成功 | 绿色状态标签 |\n| 失败 | 红色状态标签 |\n| 异常 | 橙色状态标签 |\n\n状态取当前订单记录中的订单状态。三种状态的订单均可出现在列表中，并均计入当前查询总计的充值金额。",
+    "mini-game-recharge-detail-channel": "# 支付渠道筛选\n\n## 可选项\n\n- 全部\n- 游币充值\n- 微信APP\n- 支付宝H5\n- 支付宝APP\n\n## 筛选联动\n\n选择后立即刷新列表和查询总计，并返回第1页。支付渠道与顶部其他查询条件使用“且”；选择“全部”时仅清空支付渠道条件。",
+    "mini-game-recharge-detail-subsidy": "# 平台补贴金额\n\n快爆小游戏不提供平台补贴金额信息。查询总计行和所有数据行统一显示 `-`，不显示下划线，不可点击，也不提供平台补贴下钻弹窗。",
+    "mini-game-recharge-detail-order-entry": "# 订单详情入口\n\n## 如何打开\n\n点击列表“订单号”列中任一带下划线的订单号，打开当前数据行的订单详情弹窗。\n\n## 显示条件\n\n仅数据行订单号可点击；查询总计行不显示订单号。点击后不改变查询条件和分页，弹窗区域显示对应的橙色批注标记。",
+    "mini-game-recharge-detail-order-modal": "# 订单详情弹窗\n\n## 字段\n\n| 字段 | 展示内容 |\n| --- | --- |\n| 游戏ID / 名称 | 当前订单关联的游戏 |\n| 订单号 | 快爆平台订单号 |\n| 游戏订单号 | 游戏侧订单号 |\n| 游戏币 | 当前订单对应的游戏币或游戏内商品描述 |\n| 游戏区服ID | 游戏侧区服标识 |\n| 服务端回传值 | 当前订单记录中的游戏服务端回传内容 |\n\n服务端回传值能够解析为JSON时按JSON分行展示；不能解析时按原内容展示。弹窗不显示标题和底部关闭按钮；点击右上角 `×` 或遮罩关闭，关闭后保留查询条件和分页。"
+  },
+  "assetMap": {},
+  "directory": {
+    "nodes": [
+      {
+        "type": "folder",
+        "id": "mobile",
+        "title": "手游",
+        "defaultExpanded": true,
+        "children": [
+          {
+            "type": "folder",
+            "id": "mobile-recharge-detail",
+            "title": "充值明细",
+            "defaultExpanded": true,
+            "children": [
+              { "type": "route", "id": "route-mobile-recharge-formal", "title": "正式订单", "route": "mobile-recharge-formal" },
+              { "type": "route", "id": "route-mobile-recharge-test", "title": "测试订单", "route": "mobile-recharge-test" }
+            ]
+          },
+          {
+            "type": "folder",
+            "id": "mobile-recharge-stats",
+            "title": "充值统计",
+            "children": [
+              { "type": "route", "id": "route-mobile-recharge-game-stats", "title": "游戏统计", "route": "mobile-recharge-game-stats" },
+              { "type": "route", "id": "route-mobile-recharge-developer-stats", "title": "开发者统计", "route": "mobile-recharge-developer-stats" },
+              { "type": "route", "id": "route-mobile-recharge-summary-stats", "title": "汇总统计", "route": "mobile-recharge-summary-stats" }
+            ]
+          },
+          { "type": "route", "id": "route-mobile-paid-download-detail", "title": "付费下载明细", "route": "mobile-paid-download-detail" },
+          {
+            "type": "folder",
+            "id": "mobile-paid-download-stats",
+            "title": "付费下载统计",
+            "children": [
+              { "type": "route", "id": "route-mobile-paid-download-game-stats", "title": "游戏统计", "route": "mobile-paid-download-game-stats" },
+              { "type": "route", "id": "route-mobile-paid-download-developer-stats", "title": "开发者统计", "route": "mobile-paid-download-developer-stats" },
+              { "type": "route", "id": "route-mobile-paid-download-summary-stats", "title": "汇总统计", "route": "mobile-paid-download-summary-stats" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "folder",
+        "id": "pc-game",
+        "title": "PC游戏",
+        "children": [
+          { "type": "route", "id": "route-pc-recharge-detail", "title": "充值明细", "route": "pc-recharge-detail" }
+        ]
+      },
+      {
+        "type": "folder",
+        "id": "mini-game",
+        "title": "快爆小游戏",
+        "children": [
+          { "type": "route", "id": "route-mini-game-recharge-detail", "title": "充值明细", "route": "mini-game-recharge-detail" }
+        ]
+      }
+    ]
+  }
+}

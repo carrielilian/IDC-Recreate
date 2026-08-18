@@ -52,11 +52,17 @@ input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance:
 .kbi-header > select { height: 32px; width: 190px; border: 1px solid var(--kbi-primary); border-radius: 4px; padding: 0 10px; color: #294897; background: #fff; }
 .kbi-crumb { color: var(--kbi-secondary); }
 .kbi-crumb span { display: inline-block; padding: 0 5px; color: var(--kbi-muted); font-size: 17px; line-height: 1; vertical-align: -1px; }
+.kbi-annotation-toggle { margin-left: auto; height: 30px; padding: 0; border: 0; background: transparent; color: #4b5563; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.kbi-annotation-toggle:focus-visible { outline: 2px solid var(--kbi-primary); outline-offset: 2px; border-radius: 4px; }
+.kbi-annotation-toggle > i { position: relative; display: inline-block; width: 34px; height: 18px; border-radius: 9px; background: #c9ced8; transition: background .15s ease; }
+.kbi-annotation-toggle > i > b { position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.24); transition: transform .15s ease; }
+.kbi-annotation-toggle.is-on > i { background: var(--kbi-primary); }
+.kbi-annotation-toggle.is-on > i > b { transform: translateX(16px); }
 .kbi-content { padding: 8px 14px 24px; }
 .kbi-secondary-tab { display: inline-flex; height: 32px; align-items: center; padding: 0 16px; margin-bottom: 12px; background: var(--kbi-primary); color: #fff; border-radius: 4px 4px 0 0; }
-.kbi-card { background: #fff; min-height: calc(100vh - 112px); padding: 12px 14px 18px; }
+.kbi-card { background: #fff; min-height: calc(100vh - 112px); padding: 22px 24px 28px; }
 
-.kbi-querybar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; overflow: visible; padding-bottom: 4px; }
+.kbi-querybar { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; overflow: visible; padding-bottom: 4px; }
 .kbi-querybar > select { height: 32px; width: 198px; min-width: 198px; border: 1px solid #dcdfe6; border-radius: 4px; padding: 0 10px; background: #fff; }
 .kbi-querybar > input { height: 32px; width: 146px; min-width: 146px; border: 1px solid #dcdfe6; border-radius: 4px; padding: 0 9px; }
 .kbi-querybar > input:focus, .kbi-querybar > select:focus { outline: 0; border-color: var(--kbi-primary); }
@@ -71,6 +77,7 @@ input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance:
 .kbi-btn:hover { border-color: var(--kbi-primary); color: var(--kbi-primary); }
 .kbi-btn-primary { background: var(--kbi-primary); border-color: var(--kbi-primary); color: #fff; }
 .kbi-btn-primary:hover { background: var(--kbi-primary-hover); color: #fff; }
+.kbi-btn:disabled, .kbi-btn:disabled:hover { border-color: #dcdfe6; background: #f5f7fa; color: #b8bdc7; cursor: not-allowed; }
 
 .kbi-date-picker { position: relative; display: flex; align-items: center; gap: 8px; flex: none; }
 .kbi-date-label { color: var(--kbi-secondary); }
@@ -91,6 +98,7 @@ input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance:
 .kbi-calendar-week span { height: 34px; display: grid; place-items: center; color: var(--kbi-secondary); }
 .kbi-calendar-grid button { position: relative; height: 31px; border: 0; background: transparent; color: var(--kbi-text); cursor: pointer; }
 .kbi-calendar-grid button:hover { color: var(--kbi-primary); }
+.kbi-calendar-grid button:disabled, .kbi-calendar-grid button:disabled:hover { color: #d8dbe2; background: transparent; cursor: not-allowed; }
 .kbi-calendar-grid button.is-other { color: #c7cbd1; }
 .kbi-calendar-grid button.is-range { background: #f0f4ff; }
 .kbi-calendar-grid button span { position: relative; z-index: 1; width: 28px; height: 28px; margin: auto; display: grid; place-items: center; border-radius: 50%; }
@@ -103,6 +111,7 @@ input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance:
 .kbi-quick-ranges { width: 100px; flex: none; padding: 10px 0; border-right: 1px solid var(--kbi-border); display: flex; flex-direction: column; }
 .kbi-quick-ranges button { height: 32px; padding: 0 12px; border: 0; background: #fff; color: var(--kbi-text); text-align: left; cursor: pointer; }
 .kbi-quick-ranges button:hover { background: #f0f4ff; color: var(--kbi-primary); }
+.kbi-month-picker-grid button:disabled, .kbi-year-picker-grid button:disabled { color: #cfd3db; background: #fafafa; cursor: not-allowed; }
 .kbi-stats-date-popover.is-month { width: 580px; }
 .kbi-stats-picker-nav { position: absolute; inset: 0 0 auto; z-index: 2; height: 45px; padding: 0 18px; display: grid; grid-template-columns: 32px 1fr 32px; align-items: center; }
 .kbi-stats-picker-nav button { width: 28px; height: 28px; border: 0; background: transparent; color: var(--kbi-secondary); border-radius: 3px; cursor: pointer; }
@@ -267,6 +276,7 @@ tbody tr:not(.kbi-total-row):hover td { background: #f5f7fa; }
 .kbi-modal .kbi-modal-table-head dt, .kbi-modal .kbi-modal-table-head dd { display: flex; align-items: center; justify-content: center; background: #fff; text-align: center; color: #4b4f55; font-weight: 700; }
 .kbi-modal pre { margin: 0; white-space: pre-wrap; color: #62666d; font-family: ui-monospace,SFMono-Regular,Consolas,monospace; line-height: 1.85; }
 .kbi-toast { position: fixed; z-index: 2000; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 18px; background: #f0f9eb; border: 1px solid #b3e19d; color: #3a8b1d; border-radius: 4px; box-shadow: 0 5px 16px rgba(0,0,0,.12); }
+.kbi-toast.is-error { background: #fef0f0; border-color: #fbc4c4; color: #d93025; }
 
 @media (max-width: 720px) {
   .kbi-sidebar { width: 160px; }
